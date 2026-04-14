@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinBridge 2030 — Financial Innovation Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Strategies</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="app.html">Mobile App</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-label">US Financial Services Innovation Platform · 2026–2030</div>
+  <h1>Next-Generation<br><span class="accent">Financial Infrastructure</span><br>for a Disrupted Economy</h1>
+  <p class="hero-sub">15 AI-powered financial strategies addressing technology growth, gas shortage, rising expenses, and unemployment — with projected CAGR, market capture, and partner onboarding built in.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-v">$847B</div><div class="hstat-l">Total Addressable Market</div></div>
+    <div class="hstat"><div class="hstat-v">15</div><div class="hstat-l">Active Strategies</div></div>
+    <div class="hstat"><div class="hstat-v">6 sectors</div><div class="hstat-l">Capital Deployment</div></div>
+    <div class="hstat"><div class="hstat-v">2.4yr</div><div class="hstat-l">Avg. Breakeven</div></div>
+  </div>
+</header>
+
+<section class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all')">All Strategies</button>
+  <button class="filter-btn" onclick="filterCards('micro')">Micro-Loans</button>
+  <button class="filter-btn" onclick="filterCards('savings')">Savings</button>
+  <button class="filter-btn" onclick="filterCards('bridge')">BRIDGE Fund</button>
+  <button class="filter-btn" onclick="filterCards('ai')">AI Products</button>
+  <button class="filter-btn" onclick="filterCards('gig')">Gig Economy</button>
+</section>
+
+<main class="strategies-grid" id="strategies-grid">
+</main>
+
+<section class="bridge-spotlight">
+  <div class="spotlight-inner">
+    <div class="spotlight-badge">Flagship Product</div>
+    <h2>BRIDGE Fund</h2>
+    <p class="spotlight-sub">Bilateral Returns for Infrastructure, Development &amp; Growth Economies</p>
+    <div class="bridge-grid">
+      <div class="bridge-col">
+        <h3>For US Investors</h3>
+        <ul>
+          <li>CRA credit qualification</li>
+          <li>Federal tax deduction on qualifying investments</li>
+          <li>6–12% projected IRR by tranche</li>
+          <li>Quarterly liquidity windows (Senior tranche)</li>
+          <li>Carbon credit yield supplements</li>
+          <li>Min. $500 investment (retail eligible)</li>
+        </ul>
+      </div>
+      <div class="bridge-col">
+        <h3>Capital Deployment</h3>
+        <div class="deploy-bars">
+          <div class="dbar"><span>Infrastructure</span><div class="dbar-track"><div class="dbar-fill" style="width:30%;background:#60a5fa"></div></div><span>30%</span></div>
+          <div class="dbar"><span>Farming &amp; Agri</span><div class="dbar-track"><div class="dbar-fill" style="width:22%;background:#4ade80"></div></div><span>22%</span></div>
+          <div class="dbar"><span>Energy Access</span><div class="dbar-track"><div class="dbar-fill" style="width:20%;background:#fbbf24"></div></div><span>20%</span></div>
+          <div class="dbar"><span>Gig Economy</span><div class="dbar-track"><div class="dbar-fill" style="width:18%;background:#a78bfa"></div></div><span>18%</span></div>
+          <div class="dbar"><span>Micro-Loan Pools</span><div class="dbar-track"><div class="dbar-fill" style="width:10%;background:#fb7185"></div></div><span>10%</span></div>
+        </div>
+      </div>
+      <div class="bridge-col">
+        <h3>Tranche Structure</h3>
+        <div class="tranches">
+          <div class="tranche senior"><div class="tr-name">Senior</div><div class="tr-rate">5.5–6.5%</div><div class="tr-desc">Retail eligible · Quarterly liquidity</div></div>
+          <div class="tranche mezz"><div class="tr-name">Mezzanine</div><div class="tr-rate">7–8.5%</div><div class="tr-desc">Accredited · Carbon yield top-up</div></div>
+          <div class="tranche equity"><div class="tr-name">Impact Equity</div><div class="tr-rate">9–12%</div><div class="tr-desc">Institutional · Outcome-linked carry</div></div>
+        </div>
+      </div>
+    </div>
+    <a href="portal.html" class="btn-primary">Join as BRIDGE Fund Partner →</a>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to integrate?</h2>
+  <p>Sign up as a partner, obtain your API key, and start testing with live dummy data in under 10 minutes.</p>
+  <div class="cta-buttons">
+    <a href="portal.html" class="btn-primary">Partner Portal</a>
+    <a href="app.html" class="btn-outline">Download App</a>
+    <a href="api.html" class="btn-outline">API Reference</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links">
+    <a href="index.html">Strategies</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="app.html">App</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional platform for demonstration purposes</div>
+</footer>
+
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script src="js/strategies.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

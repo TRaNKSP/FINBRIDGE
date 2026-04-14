@@ -1,0 +1,47 @@
+{
+  "strategy": "embedded-mobility-wallet",
+  "version": "v1",
+  "environment": "sandbox",
+  "description": "Dummy data for Embedded Mobility Wallet and Predictive Overdraft Prevention. Fictional.",
+  "mobility_wallets": [
+    {
+      "wallet_id": "MOB-20270801-00182",
+      "user_id": "USR-991821",
+      "vehicle_type": "ev",
+      "oem_partner": "ford",
+      "balance_usd": 124.40,
+      "monthly_commute_cost_baseline": 187.00,
+      "ai_7day_forecast_usd": 164.20,
+      "savings_vs_gas_ytd_usd": 1840.20,
+      "carbon_credits_earned_ytd": 42,
+      "transactions": [
+        { "tx_id": "MOB-TX-001", "date": "2027-08-01", "type": "toll", "amount": 3.50, "route": "I-95 Southbound", "auto_paid": true },
+        { "tx_id": "MOB-TX-002", "date": "2027-08-01", "type": "ev_charging", "amount": 12.80, "station": "ChargePoint #4821", "kw_charged": 32, "auto_paid": true },
+        { "tx_id": "MOB-TX-003", "date": "2027-08-02", "type": "transit", "amount": 2.75, "route": "BART Line 3", "mode_suggested_by_ai": true }
+      ],
+      "mode_split_this_month": { "ev_driving_pct": 68, "public_transit_pct": 22, "rideshare_pct": 10 }
+    }
+  ],
+  "overdraft_prevention": [
+    {
+      "account_id": "CHK-20261001-00441",
+      "user_id": "USR-441829",
+      "overdraft_risk_score": 0.78,
+      "risk_level": "high",
+      "projected_overdraft_date": "2026-11-12",
+      "projected_overdraft_amount": -142.80,
+      "ai_interventions": [
+        { "action": "move_funds_from_savings", "amount": 150.00, "source": "SVG-ARS-20261001-00481", "executed_at": "2026-11-08T08:30:00Z", "status": "completed" },
+        { "action": "pause_subscription", "subscription": "Netflix $15.99", "paused_until": "2026-11-20", "executed_at": "2026-11-08T08:30:01Z", "status": "completed" }
+      ],
+      "interventions_30d": 2,
+      "overdrafts_prevented_30d": 2,
+      "fees_saved_usd": 70.00,
+      "cash_flow_fingerprint": {
+        "avg_income_day_of_month": [1, 15],
+        "high_expense_days": [3, 16, 28],
+        "avg_monthly_surplus": 284.40
+      }
+    }
+  ]
+}

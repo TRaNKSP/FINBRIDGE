@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Dashboard — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.dash-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; border:1px solid var(--border); margin-bottom:2rem; }
+.kpi { background:var(--bg2); padding:1.5rem; border-right:1px solid var(--border); }
+.kpi:last-child { border-right:none; }
+.kpi-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem; font-family:var(--font-mono); }
+.kpi-value { font-family:var(--font-head); font-size:2rem; font-weight:800; color:var(--text); }
+.kpi-delta { font-size:12px; margin-top:4px; }
+.kpi-delta.up { color:var(--green); }
+.kpi-delta.neutral { color:var(--text3); }
+.chart-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:1.5rem; }
+.chart-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; }
+.chart-title { font-family:var(--font-head); font-size:1rem; font-weight:700; }
+.chart-sub { font-size:12px; color:var(--text2); margin-top:2px; }
+.chart-legend { display:flex; gap:1rem; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text2); }
+.legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.charts-2col { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+@media(max-width:768px) { .charts-2col { grid-template-columns:1fr; } .dash-grid { grid-template-columns:1fr 1fr; } }
+.strategy-table { width:100%; border-collapse:collapse; font-size:13px; }
+.strategy-table th { text-align:left; padding:10px 12px; font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; border-bottom:1px solid var(--border); font-weight:500; }
+.strategy-table td { padding:10px 12px; border-bottom:1px solid var(--border); color:var(--text2); }
+.strategy-table tr:hover td { background:var(--bg3); color:var(--text); }
+.strategy-table td:first-child { color:var(--text); font-weight:500; }
+.pill-val { display:inline-block; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:500; }
+.pill-green { background:rgba(34,197,94,.15); color:var(--green); }
+.pill-amber { background:rgba(251,191,36,.15); color:var(--amber); }
+.pill-blue { background:rgba(59,130,246,.15); color:var(--accent2); }
+.pill-purple { background:rgba(139,92,246,.15); color:#c4b5fd; }
+.tabs { display:flex; gap:.5rem; margin-bottom:1.5rem; }
+.tab { padding:7px 16px; border-radius:8px; background:transparent; border:1px solid var(--border); cursor:pointer; font-size:13px; color:var(--text2); font-family:var(--font-body); transition:all .15s; }
+.tab.active { background:var(--bg3); color:var(--text); border-color:var(--border2); }
+.breakeven-bars { display:flex; flex-direction:column; gap:.75rem; }
+.be-row { display:flex; align-items:center; gap:.75rem; }
+.be-name { font-size:12px; color:var(--text2); min-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.be-track { flex:1; height:8px; background:var(--bg3); border-radius:4px; overflow:hidden; }
+.be-fill { height:100%; border-radius:4px; transition:width .8s ease; }
+.be-val { font-size:11px; color:var(--text3); min-width:50px; text-align:right; font-family:var(--font-mono); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="analytics.html" class="active">Analytics</a>
+    <a href="compare.html">Compare</a>
+    <a href="bridge-investor.html">BRIDGE Fund</a>
+    <a href="sandbox.html">API Sandbox</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div style="max-width:1280px;margin:0 auto;padding:2.5rem">
+  <div style="margin-bottom:2rem">
+    <div class="hero-label">Platform Intelligence</div>
+    <h1 style="font-family:var(--font-head);font-size:2rem;font-weight:800;letter-spacing:-.02em">Analytics Dashboard</h1>
+    <p style="color:var(--text2);font-size:14px;margin-top:.5rem">5-year market capture, CAGR rankings, breakeven projections, and trigger-to-strategy analysis across all 15 initiatives.</p>
+  </div>
+
+  <div class="dash-grid">
+    <div class="kpi"><div class="kpi-label">Total 2030 Market</div><div class="kpi-value">$278B</div><div class="kpi-delta up">↑ Across 15 strategies</div></div>
+    <div class="kpi"><div class="kpi-label">Portfolio Avg CAGR</div><div class="kpi-value">40.2%</div><div class="kpi-delta up">↑ vs 12% industry avg</div></div>
+    <div class="kpi"><div class="kpi-label">Avg Breakeven</div><div class="kpi-value">2.0 yrs</div><div class="kpi-delta up">↑ Fastest: 1.1 yrs</div></div>
+    <div class="kpi"><div class="kpi-label">Total Addressable</div><div class="kpi-value">$847B</div><div class="kpi-delta neutral">32.9% capture by 2030</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div><div class="chart-title">Cumulative Market Capture 2026–2030</div><div class="chart-sub">All 15 strategies combined, $B</div></div>
+    </div>
+    <canvas id="cumulativeChart" height="80"></canvas>
+  </div>
+
+  <div class="charts-2col">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">CAGR by Strategy</div><div class="chart-sub">5-year projected growth rate</div></div>
+      </div>
+      <canvas id="cagrChart" height="220"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">2030 Market Size by Strategy</div><div class="chart-sub">Projected market capture $B</div></div>
+      </div>
+      <canvas id="marketChart" height="220"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div><div class="chart-title">Breakeven Timeline</div><div class="chart-sub">Years to breakeven per strategy — shorter is better</div></div>
+    </div>
+    <div class="breakeven-bars" id="breakeven-bars"></div>
+  </div>
+
+  <div class="charts-2col">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">Trigger Coverage Matrix</div><div class="chart-sub">Strategies per economic trigger</div></div>
+      </div>
+      <canvas id="triggerChart" height="200"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">Market Entry by Year</div><div class="chart-sub">Strategies launching per year</div></div>
+      </div>
+      <canvas id="launchChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div><div class="chart-title">All Strategies — Full Comparison</div><div class="chart-sub">CAGR · Market Size · Breakeven · Launch Year</div></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="strategy-table" id="full-table"></table>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links"><a href="index.html">Strategies</a><a href="portal.html">Partner Portal</a><a href="app.html">App</a><a href="api.html">API Docs</a></div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional platform for demonstration purposes</div>
+</footer>
+
+<script src="js/strategies.js"></script>
+<script>
+Chart.defaults.color = '#8b909e';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.07)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+const years = ['2026','2027','2028','2029','2030'];
+const cumData = [13.6, 41.2, 79.8, 128.4, 278.1];
+
+new Chart(document.getElementById('cumulativeChart'), {
+  type:'line',
+  data:{
+    labels: years,
+    datasets:[{
+      label:'Total Market Capture ($B)',
+      data: cumData,
+      borderColor:'#3b82f6',
+      backgroundColor:'rgba(59,130,246,0.08)',
+      fill:true,
+      tension:0.4,
+      pointBackgroundColor:'#3b82f6',
+      pointRadius:5,
+      borderWidth:2
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{ display:false } },
+    scales:{
+      y:{ ticks:{ callback: v => '$'+v+'B' }, grid:{ color:'rgba(255,255,255,0.05)' } },
+      x:{ grid:{ color:'rgba(255,255,255,0.05)' } }
+    }
+  }
+});
+
+const sorted_cagr = [...STRATEGIES].sort((a,b) => parseInt(b.cagr) - parseInt(a.cagr));
+new Chart(document.getElementById('cagrChart'), {
+  type:'bar',
+  data:{
+    labels: sorted_cagr.map(s => s.num),
+    datasets:[{
+      label:'CAGR %',
+      data: sorted_cagr.map(s => parseInt(s.cagr)),
+      backgroundColor: sorted_cagr.map(s => {
+        const v = parseInt(s.cagr);
+        if(v >= 50) return 'rgba(34,197,94,0.7)';
+        if(v >= 40) return 'rgba(59,130,246,0.7)';
+        if(v >= 30) return 'rgba(251,191,36,0.7)';
+        return 'rgba(139,92,246,0.6)';
+      }),
+      borderRadius:4
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ title: (items) => sorted_cagr[items[0].dataIndex].name } } },
+    scales:{
+      y:{ ticks:{ callback: v => v+'%' }, grid:{ color:'rgba(255,255,255,0.05)' } },
+      x:{ grid:{ display:false } }
+    }
+  }
+});
+
+const sorted_mkt = [...STRATEGIES].sort((a,b) => parseFloat(b.marketCapture) - parseFloat(a.marketCapture));
+new Chart(document.getElementById('marketChart'), {
+  type:'bar',
+  data:{
+    labels: sorted_mkt.map(s => s.num),
+    datasets:[{
+      label:'2030 Market $B',
+      data: sorted_mkt.map(s => parseFloat(s.marketCapture)),
+      backgroundColor:'rgba(96,165,250,0.65)',
+      borderRadius:4
+    }]
+  },
+  options:{
+    responsive:true,
+    indexAxis:'y',
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ title: (items) => sorted_mkt[items[0].dataIndex].name } } },
+    scales:{
+      x:{ ticks:{ callback: v => '$'+v+'B' }, grid:{ color:'rgba(255,255,255,0.05)' } },
+      y:{ grid:{ display:false } }
+    }
+  }
+});
+
+const sorted_be = [...STRATEGIES].sort((a,b) => parseFloat(a.breakeven) - parseFloat(b.breakeven));
+const beContainer = document.getElementById('breakeven-bars');
+const maxBe = 3.5;
+sorted_be.forEach(s => {
+  const val = parseFloat(s.breakeven);
+  const pct = (val / maxBe * 100).toFixed(1);
+  const color = val <= 1.5 ? '#22c55e' : val <= 2.2 ? '#3b82f6' : '#f59e0b';
+  beContainer.innerHTML += `<div class="be-row">
+    <div class="be-name">${s.num} ${s.name}</div>
+    <div class="be-track"><div class="be-fill" style="width:${pct}%;background:${color}"></div></div>
+    <div class="be-val">${s.breakeven}</div>
+  </div>`;
+});
+
+new Chart(document.getElementById('triggerChart'), {
+  type:'radar',
+  data:{
+    labels:['Tech Growth','Gas Shortage','Rising Costs','Unemployment'],
+    datasets:[{
+      label:'Strategy Coverage',
+      data:[12, 8, 11, 9],
+      borderColor:'#8b5cf6',
+      backgroundColor:'rgba(139,92,246,0.15)',
+      pointBackgroundColor:'#8b5cf6'
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{display:false} },
+    scales:{ r:{ grid:{ color:'rgba(255,255,255,0.07)' }, pointLabels:{ color:'#8b909e', font:{ size:12 } }, ticks:{ display:false }, min:0, max:15 } }
+  }
+});
+
+const launchYears = {2026:0,2027:0,2028:0,2029:0,2030:0};
+STRATEGIES.forEach(s => { if(launchYears[parseInt(s.year)] !== undefined) launchYears[parseInt(s.year)]++; });
+new Chart(document.getElementById('launchChart'), {
+  type:'bar',
+  data:{
+    labels: Object.keys(launchYears),
+    datasets:[{
+      label:'Strategies Launched',
+      data: Object.values(launchYears),
+      backgroundColor:['#3b82f6','#8b5cf6','#22c55e','#f59e0b','#f43f5e'],
+      borderRadius:6
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{display:false} },
+    scales:{
+      y:{ ticks:{ stepSize:1 }, grid:{ color:'rgba(255,255,255,0.05)' } },
+      x:{ grid:{ display:false } }
+    }
+  }
+});
+
+const table = document.getElementById('full-table');
+table.innerHTML = `<thead><tr>
+  <th>#</th><th>Strategy</th><th>Launch</th><th>Category</th><th>5yr CAGR</th><th>2030 Market</th><th>Breakeven</th>
+</tr></thead>`;
+const tbody = document.createElement('tbody');
+STRATEGIES.forEach(s => {
+  const cagrN = parseInt(s.cagr);
+  const cagrClass = cagrN >= 50 ? 'pill-green' : cagrN >= 40 ? 'pill-blue' : cagrN >= 30 ? 'pill-amber' : 'pill-purple';
+  const beN = parseFloat(s.breakeven);
+  const beClass = beN <= 1.5 ? 'pill-green' : beN <= 2.2 ? 'pill-blue' : 'pill-amber';
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td style="color:var(--text3);font-family:var(--font-mono)">${s.num}</td>
+    <td>${s.name}</td>
+    <td style="font-family:var(--font-mono)">${s.year}</td>
+    <td>${s.categories.map(c=>`<span class="tag tag-${c}" style="font-size:10px">${c}</span>`).join(' ')}</td>
+    <td><span class="pill-val ${cagrClass}">${s.cagr}</span></td>
+    <td style="font-family:var(--font-mono);color:var(--accent2)">${s.marketCapture}</td>
+    <td><span class="pill-val ${beClass}">${s.breakeven}</span></td>`;
+  tr.style.cursor = 'pointer';
+  tr.addEventListener('click', () => location.href = 'compare.html?highlight=' + s.id);
+  tbody.appendChild(tr);
+});
+table.appendChild(tbody);
+</script>
+</body>
+</html>

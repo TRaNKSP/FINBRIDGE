@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRIDGE Fund — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.bridge-wrap { max-width:1100px; margin:0 auto; padding:2.5rem; }
+.tranche-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2rem; }
+@media(max-width:768px){ .tranche-cards { grid-template-columns:1fr; } }
+.tr-card { background:var(--bg2); border-radius:var(--radius-lg); padding:1.75rem; border:1px solid var(--border); position:relative; }
+.tr-card.featured { border-color:var(--accent); }
+.featured-badge { position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font-size:11px; padding:2px 12px; border-radius:20px; white-space:nowrap; font-weight:500; }
+.tr-name { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem; font-family:var(--font-mono); }
+.tr-rate-lg { font-family:var(--font-head); font-size:2.5rem; font-weight:800; margin-bottom:.25rem; }
+.tr-rate-sub { font-size:13px; color:var(--text2); margin-bottom:1.25rem; }
+.tr-features { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.5rem; }
+.tr-features li { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:.5rem; padding:5px 0; border-bottom:1px solid var(--border); }
+.tr-features li:last-child { border:none; }
+.tr-features li::before { content:"✓"; color:var(--green); flex-shrink:0; font-weight:700; }
+.project-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+@media(max-width:600px){ .project-grid { grid-template-columns:1fr; } }
+.proj-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; cursor:pointer; transition:border-color .15s; }
+.proj-card:hover { border-color:var(--border2); }
+.proj-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.75rem; }
+.proj-country { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; font-family:var(--font-mono); }
+.proj-status { font-size:10px; padding:2px 7px; border-radius:10px; }
+.status-op { background:rgba(34,197,94,.15); color:var(--green); }
+.status-con { background:rgba(251,191,36,.15); color:var(--amber); }
+.proj-name { font-weight:600; font-size:.95rem; margin-bottom:.5rem; }
+.proj-sector { display:inline-block; font-size:10px; padding:2px 7px; border-radius:10px; margin-bottom:.75rem; }
+.proj-metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.5rem; }
+.proj-m { background:var(--bg3); border-radius:6px; padding:7px 8px; }
+.proj-ml { font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; }
+.proj-mv { font-family:var(--font-head); font-size:.9rem; font-weight:700; }
+.invest-form { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:2rem; margin-top:2rem; }
+.invest-form h2 { font-family:var(--font-head); font-size:1.3rem; font-weight:700; margin-bottom:1.5rem; }
+.amount-input-wrap { position:relative; }
+.amount-input-wrap span { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text3); }
+.amount-input-wrap input { padding-left:28px; }
+.return-preview { background:var(--bg3); border-radius:10px; padding:1.25rem; margin-top:1rem; display:none; }
+.return-preview.show { display:block; }
+.return-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; }
+.return-item { text-align:center; }
+.return-lbl { font-size:11px; color:var(--text3); margin-bottom:3px; }
+.return-val { font-family:var(--font-head); font-size:1.2rem; font-weight:700; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="compare.html">Compare</a>
+    <a href="bridge-investor.html" class="active">BRIDGE Fund</a>
+    <a href="sandbox.html">API Sandbox</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div class="bridge-wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="hero-label">Flagship Impact Product</div>
+    <h1 style="font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1">BRIDGE Fund</h1>
+    <p style="color:var(--text2);font-size:16px;margin-top:.75rem;max-width:600px">Bilateral Returns for Infrastructure, Development &amp; Growth Economies — the first US-domiciled impact fund deploying capital into global development with AI-managed underwriting at scale.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);margin-bottom:2rem">
+    <div style="background:var(--bg2);padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);margin-bottom:.5rem">Target Fund Size</div><div style="font-family:var(--font-head);font-size:1.75rem;font-weight:800">$25B</div></div>
+    <div style="background:var(--bg2);padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);margin-bottom:.5rem">5yr CAGR</div><div style="font-family:var(--font-head);font-size:1.75rem;font-weight:800;color:var(--green)">58%</div></div>
+    <div style="background:var(--bg2);padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);margin-bottom:.5rem">2030 Market</div><div style="font-family:var(--font-head);font-size:1.75rem;font-weight:800;color:var(--accent2)">$47.3B</div></div>
+    <div style="background:var(--bg2);padding:1.25rem"><div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);margin-bottom:.5rem">Breakeven</div><div style="font-family:var(--font-head);font-size:1.75rem;font-weight:800;color:var(--amber)">2.8 yrs</div></div>
+  </div>
+
+  <h2 style="font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:1rem">Investor Tranches</h2>
+  <div class="tranche-cards">
+    <div class="tr-card">
+      <div class="tr-name">Senior Tranche</div>
+      <div class="tr-rate-lg" style="color:var(--accent2)">5.5–6.5%</div>
+      <div class="tr-rate-sub">Projected Net IRR</div>
+      <ul class="tr-features">
+        <li>Minimum investment: $500</li>
+        <li>Retail eligible (non-accredited)</li>
+        <li>Quarterly liquidity windows</li>
+        <li>First-loss protection layer</li>
+        <li>CRA credit qualifying</li>
+        <li>Federal tax deduction eligible</li>
+        <li>Carbon credit yield supplement</li>
+      </ul>
+      <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="selectTranche('senior')">Invest in Senior →</button>
+    </div>
+    <div class="tr-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="tr-name">Mezzanine Tranche</div>
+      <div class="tr-rate-lg" style="color:#c4b5fd">7–8.5%</div>
+      <div class="tr-rate-sub">Projected Net IRR</div>
+      <ul class="tr-features">
+        <li>Minimum investment: $25,000</li>
+        <li>Accredited investors only</li>
+        <li>Semi-annual liquidity windows</li>
+        <li>Enhanced carbon credit allocation</li>
+        <li>CRA credit qualifying</li>
+        <li>Sector preference selection</li>
+        <li>Quarterly impact reporting</li>
+      </ul>
+      <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="selectTranche('mezzanine')">Invest in Mezzanine →</button>
+    </div>
+    <div class="tr-card">
+      <div class="tr-name">Impact Equity Tranche</div>
+      <div class="tr-rate-lg" style="color:var(--green)">9–12%</div>
+      <div class="tr-rate-sub">Projected Net IRR</div>
+      <ul class="tr-features">
+        <li>Minimum investment: $500,000</li>
+        <li>Institutional / qualified purchaser</li>
+        <li>Annual liquidity</li>
+        <li>Equity upside in project companies</li>
+        <li>Outcome-linked carry structure</li>
+        <li>Co-investment rights on top deals</li>
+        <li>Advisory board seat at $5M+</li>
+      </ul>
+      <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="selectTranche('equity')">Invest in Equity →</button>
+    </div>
+  </div>
+
+  <h2 style="font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:1rem">Active Projects (Sandbox)</h2>
+  <div class="project-grid" id="project-grid"></div>
+
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:2rem">
+    <h2 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">AUM Growth Projection</h2>
+    <canvas id="aumChart" height="70"></canvas>
+  </div>
+
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1.5rem">
+    <h2 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1rem">How the Domestic Reserve Works</h2>
+    <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:1rem">15% of all BRIDGE Fund capital is held in a domestic reserve and deployed into US communities — creating direct benefit for American investors beyond their financial return:</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem">
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:1rem">
+        <div style="font-size:11px;color:var(--accent2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">US Gig Worker Micro-Loans</div>
+        <div style="font-size:13px;color:var(--text2)">Advances to Uber, DoorDash, and TaskRabbit workers facing fuel or income gaps — backed by the domestic reserve fund at 0% cost to the worker.</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:1rem">
+        <div style="font-size:11px;color:var(--green);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Community Energy Projects</div>
+        <div style="font-size:13px;color:var(--text2)">Solar microgrid installations in underserved US communities. Energy savings flow back to residents while generating carbon credits for the fund.</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:1rem">
+        <div style="font-size:11px;color:var(--amber);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Agricultural Harvest Advances</div>
+        <div style="font-size:13px;color:var(--text2)">Seasonal credit for US small farmers — $200 to $10,000 — at below-market rates subsidized by the global fund's overall returns.</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:1rem">
+        <div style="font-size:11px;color:#c4b5fd;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">CRA Credit for Bank Partners</div>
+        <div style="font-size:13px;color:var(--text2)">Bank investors receive qualifying CRA credit for the entire investment — not just the domestic reserve — under the Community Finance Investment Act framework.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invest-form" id="invest-form">
+    <h2>Investment Calculator</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Tranche</label>
+        <select id="calc-tranche" onchange="calcReturn()">
+          <option value="senior">Senior (5.5–6.5% IRR)</option>
+          <option value="mezzanine">Mezzanine (7–8.5% IRR)</option>
+          <option value="equity">Impact Equity (9–12% IRR)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Investment Amount (USD)</label>
+        <div class="amount-input-wrap"><span>$</span><input type="number" id="calc-amount" value="5000" min="500" oninput="calcReturn()"></div>
+      </div>
+      <div class="form-group">
+        <label>Investment Horizon (years)</label>
+        <select id="calc-years" onchange="calcReturn()">
+          <option value="1">1 year</option>
+          <option value="3">3 years</option>
+          <option value="5" selected>5 years</option>
+          <option value="10">10 years</option>
+        </select>
+      </div>
+    </div>
+    <div class="return-preview show" id="return-preview">
+      <div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem">Projected Returns</div>
+      <div class="return-grid">
+        <div class="return-item"><div class="return-lbl">Total Return</div><div class="return-val" id="ret-total" style="color:var(--green)">—</div></div>
+        <div class="return-item"><div class="return-lbl">Est. Distributions</div><div class="return-val" id="ret-dist" style="color:var(--accent2)">—</div></div>
+        <div class="return-item"><div class="return-lbl">Carbon Credits</div><div class="return-val" id="ret-carbon" style="color:var(--amber)">—</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:.75rem">Projections are illustrative only. Actual returns depend on project performance. All figures are sandbox estimates.</div>
+    </div>
+    <button class="btn-primary" style="margin-top:1.5rem" onclick="location.href='portal.html?strategy=bridge-fund'">Sign Up as BRIDGE Fund Partner →</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links"><a href="index.html">Strategies</a><a href="portal.html">Partner Portal</a><a href="app.html">App</a><a href="api.html">API Docs</a></div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional demonstration platform</div>
+</footer>
+
+<script src="js/strategies.js"></script>
+<script>
+Chart.defaults.color = '#8b909e';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.07)';
+
+const PROJECTS = [
+  { id:'PRJ-KE-INFRA-0041', name:'Nairobi Last-Mile Road Network', country:'Kenya', sector:'Infrastructure', status:'construction', irr:8.4, fund_stake:'$3.2M', jobs:412, carbon:1840, risk:0.18 },
+  { id:'PRJ-IN-FARM-0218', name:'Maharashtra Smallholder Irrigation', country:'India', sector:'Farming', status:'operational', irr:7.1, fund_stake:'$1.8M', acres:12800, yield_imp:'34%', risk:0.14 },
+  { id:'PRJ-NG-ENRG-0087', name:'Lagos Peri-Urban Solar Micro-Grid', country:'Nigeria', sector:'Energy', status:'operational', irr:9.2, fund_stake:'$2.1M', households:8200, carbon:3840, risk:0.21 },
+  { id:'PRJ-BR-GIG-0034', name:'São Paulo Gig Worker Financial Hub', country:'Brazil', sector:'Gig Economy', status:'operational', irr:11.4, fund_stake:'$1.4M', workers:28000, default_rate:'2.1%', risk:0.19 },
+  { id:'PRJ-VN-INFRA-0091', name:'Ho Chi Minh City Flood Barriers', country:'Vietnam', sector:'Infrastructure', status:'construction', irr:7.8, fund_stake:'$4.1M', beneficiaries:480000, carbon:2240, risk:0.23 },
+  { id:'PRJ-GH-FARM-0042', name:'Ashanti Region Cocoa Cooperative', country:'Ghana', sector:'Farming', status:'operational', irr:8.9, fund_stake:'$0.9M', farmers:1840, yield_imp:'28%', risk:0.16 },
+  { id:'PRJ-CO-GIG-0018', name:'Bogotá Informal Worker Credit Fund', country:'Colombia', sector:'Gig Economy', status:'operational', irr:12.1, fund_stake:'$1.1M', workers:14200, default_rate:'2.8%', risk:0.22 },
+  { id:'PRJ-PH-ENRG-0055', name:'Mindanao Rural Electrification Grid', country:'Philippines', sector:'Energy', status:'construction', irr:8.4, fund_stake:'$2.8M', households:14000, carbon:5200, risk:0.25 }
+];
+
+const SECTOR_COLORS = { Infrastructure:'#3b82f6', Farming:'#22c55e', Energy:'#f59e0b', 'Gig Economy':'#8b5cf6' };
+const grid = document.getElementById('project-grid');
+PROJECTS.forEach(p => {
+  const color = SECTOR_COLORS[p.sector] || '#8b909e';
+  const statusClass = p.status === 'operational' ? 'status-op' : 'status-con';
+  const extra = p.jobs ? `<div class="proj-m"><div class="proj-ml">Jobs</div><div class="proj-mv">${p.jobs.toLocaleString()}</div></div>`
+    : p.households ? `<div class="proj-m"><div class="proj-ml">Households</div><div class="proj-mv">${p.households.toLocaleString()}</div></div>`
+    : p.workers ? `<div class="proj-m"><div class="proj-ml">Workers</div><div class="proj-mv">${p.workers.toLocaleString()}</div></div>`
+    : `<div class="proj-m"><div class="proj-ml">Farmers</div><div class="proj-mv">${p.farmers?.toLocaleString()}</div></div>`;
+  const div = document.createElement('div');
+  div.className = 'proj-card';
+  div.innerHTML = `
+    <div class="proj-top">
+      <div class="proj-country">${p.country}</div>
+      <div class="proj-status ${statusClass}">${p.status}</div>
+    </div>
+    <div class="proj-name">${p.name}</div>
+    <div class="proj-sector" style="background:${color}22;color:${color}">${p.sector}</div>
+    <div class="proj-metrics">
+      <div class="proj-m"><div class="proj-ml">BRIDGE Stake</div><div class="proj-mv" style="color:var(--accent2)">${p.fund_stake}</div></div>
+      <div class="proj-m"><div class="proj-ml">Proj. IRR</div><div class="proj-mv" style="color:var(--green)">${p.irr}%</div></div>
+      ${extra}
+    </div>`;
+  grid.appendChild(div);
+});
+
+new Chart(document.getElementById('aumChart'), {
+  type:'bar',
+  data:{
+    labels:['2026','2027','2028','2029','2030'],
+    datasets:[
+      { label:'AUM ($M)', data:[247,2400,8100,16800,25000], backgroundColor:'rgba(59,130,246,0.6)', borderRadius:4, yAxisID:'y' },
+      { label:'Projected IRR (%)', data:[5.8,6.2,6.8,7.1,7.4], borderColor:'#22c55e', backgroundColor:'transparent', type:'line', tension:0.4, yAxisID:'y2', pointRadius:4 }
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{ labels:{ color:'#8b909e' } } },
+    scales:{
+      y:{ ticks:{ callback: v => '$'+v.toLocaleString()+'M' }, grid:{ color:'rgba(255,255,255,0.05)' }, position:'left' },
+      y2:{ ticks:{ callback: v => v+'%' }, grid:{ display:false }, position:'right' },
+      x:{ grid:{ display:false } }
+    }
+  }
+});
+
+const TRANCHE_RATES = { senior:[0.055,0.065], mezzanine:[0.07,0.085], equity:[0.09,0.12] };
+const CARBON_RATE = { senior:2.4, mezzanine:4.8, equity:9.6 }; // credits per $1000 per year
+
+function calcReturn() {
+  const tranche = document.getElementById('calc-tranche').value;
+  const amt = parseFloat(document.getElementById('calc-amount').value) || 0;
+  const yrs = parseInt(document.getElementById('calc-years').value);
+  const [low, high] = TRANCHE_RATES[tranche];
+  const avgRate = (low + high) / 2;
+  const totalReturn = (amt * Math.pow(1 + avgRate, yrs) - amt);
+  const annualDist = amt * avgRate;
+  const carbon = Math.round(CARBON_RATE[tranche] * (amt / 1000) * yrs);
+  document.getElementById('ret-total').textContent = '$' + Math.round(totalReturn).toLocaleString();
+  document.getElementById('ret-dist').textContent = '$' + Math.round(annualDist).toLocaleString() + '/yr';
+  document.getElementById('ret-carbon').textContent = carbon + ' credits';
+}
+
+function selectTranche(t) {
+  document.getElementById('calc-tranche').value = t;
+  calcReturn();
+  document.getElementById('invest-form').scrollIntoView({ behavior:'smooth' });
+}
+calcReturn();
+</script>
+</body>
+</html>

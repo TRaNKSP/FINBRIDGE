@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Reference — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="app.html">Mobile App</a>
+    <a href="api.html" class="active">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div class="api-wrap">
+  <div class="hero-label" style="margin-bottom:.75rem">Developer Reference</div>
+  <h1 class="page-title" style="margin-bottom:.5rem">API Reference</h1>
+  <p style="color:var(--text2);margin-bottom:2rem;font-size:14px">Base URL: <code style="font-family:var(--font-mono);color:var(--accent2);background:var(--bg2);padding:2px 8px;border-radius:5px">https://sandbox.finbridge2030.io/v1</code> &nbsp;|&nbsp; Auth: <code style="font-family:var(--font-mono);color:var(--accent2);background:var(--bg2);padding:2px 8px;border-radius:5px">Authorization: Bearer {api_key}</code></p>
+
+  <div class="api-layout">
+    <nav class="api-nav">
+      <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Endpoints</div>
+      <a href="#auth">Authentication</a>
+      <a href="#micro-credit">Micro-Credit</a>
+      <a href="#harvest">Harvest Advance</a>
+      <a href="#savings">Savings Products</a>
+      <a href="#bridge">BRIDGE Fund</a>
+      <a href="#ai-score">AI Credit Score</a>
+      <a href="#fuel">Fuel Advance</a>
+      <a href="#webhooks">Webhooks</a>
+    </nav>
+
+    <div>
+      <div class="endpoint" id="auth">
+        <h2>Authentication</h2>
+        <div class="endpoint-desc">All requests require your API key as a Bearer token in the Authorization header. Keys are generated from the Partner Portal.</div>
+        <pre><span class="json-key"># Example header
+Authorization: Bearer fb2030_sk_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789ABCD</span></pre>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/auth/validate</span></div>
+        <pre>{
+  <span class="json-key">"api_key"</span>: <span class="json-str">"fb2030_sk_..."</span>,
+  <span class="json-key">"partner_id"</span>: <span class="json-str">"PTNR-ABC123-DEF456"</span>
+}
+
+<span class="json-key">// Response</span>
+{
+  <span class="json-key">"valid"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"partner_id"</span>: <span class="json-str">"PTNR-ABC123-DEF456"</span>,
+  <span class="json-key">"org_name"</span>: <span class="json-str">"Acme Community Bank"</span>,
+  <span class="json-key">"environment"</span>: <span class="json-str">"sandbox"</span>,
+  <span class="json-key">"strategies_enabled"</span>: [<span class="json-str">"gig-micro-credit"</span>, <span class="json-str">"harvest-advance"</span>, <span class="json-str">"bridge-fund"</span>],
+  <span class="json-key">"quota_remaining"</span>: <span class="json-num">48291</span>,
+  <span class="json-key">"expires_at"</span>: <span class="json-str">"2027-04-13T00:00:00Z"</span>
+}</pre>
+      </div>
+
+      <div class="endpoint" id="micro-credit">
+        <h2>Gig Micro-Credit</h2>
+        <div class="endpoint-desc">Apply for, manage, and repay micro-credit lines attached to gig platform earnings.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/micro-credit/apply</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"worker_id"</span>: <span class="json-str">"WKR-89234"</span>,
+  <span class="json-key">"platform"</span>: <span class="json-str">"uber"</span>,
+  <span class="json-key">"requested_amount"</span>: <span class="json-num">500</span>,
+  <span class="json-key">"currency"</span>: <span class="json-str">"USD"</span>,
+  <span class="json-key">"purpose"</span>: <span class="json-str">"vehicle_maintenance"</span>
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"application_id"</span>: <span class="json-str">"MCA-20261104-00918"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"approved"</span>,
+  <span class="json-key">"approved_amount"</span>: <span class="json-num">500</span>,
+  <span class="json-key">"credit_limit"</span>: <span class="json-num">850</span>,
+  <span class="json-key">"apr"</span>: <span class="json-num">18.5</span>,
+  <span class="json-key">"repayment_pct_of_payout"</span>: <span class="json-num">15</span>,
+  <span class="json-key">"disbursed_at"</span>: <span class="json-str">"2026-11-04T14:23:11Z"</span>,
+  <span class="json-key">"ai_score"</span>: <span class="json-num">724</span>,
+  <span class="json-key">"estimated_payoff_payouts"</span>: <span class="json-num">4</span>
+}</pre>
+        <div class="method-url"><span class="method get">GET</span><span class="url">/micro-credit/{application_id}</span></div>
+        <pre><span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"application_id"</span>: <span class="json-str">"MCA-20261104-00918"</span>,
+  <span class="json-key">"worker_id"</span>: <span class="json-str">"WKR-89234"</span>,
+  <span class="json-key">"balance_outstanding"</span>: <span class="json-num">312.40</span>,
+  <span class="json-key">"payments_made"</span>: <span class="json-num">2</span>,
+  <span class="json-key">"next_repayment_trigger"</span>: <span class="json-str">"next_payout"</span>,
+  <span class="json-key">"next_repayment_amount"</span>: <span class="json-num">93.72</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"active"</span>
+}</pre>
+      </div>
+
+      <div class="endpoint" id="harvest">
+        <h2>Harvest Advance</h2>
+        <div class="endpoint-desc">Seasonal agricultural micro-loans for small farms. AI prices based on yield forecast and weather risk.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/harvest-advance/apply</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"farm_id"</span>: <span class="json-str">"FARM-TN-00412"</span>,
+  <span class="json-key">"crop_type"</span>: <span class="json-str">"corn"</span>,
+  <span class="json-key">"acres"</span>: <span class="json-num">85</span>,
+  <span class="json-key">"planting_date"</span>: <span class="json-str">"2027-04-15"</span>,
+  <span class="json-key">"requested_amount"</span>: <span class="json-num">7500</span>,
+  <span class="json-key">"state"</span>: <span class="json-str">"TN"</span>
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"loan_id"</span>: <span class="json-str">"HARV-20270415-00312"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"approved"</span>,
+  <span class="json-key">"approved_amount"</span>: <span class="json-num">7500</span>,
+  <span class="json-key">"apr"</span>: <span class="json-num">11.2</span>,
+  <span class="json-key">"ai_yield_forecast"</span>: { <span class="json-key">"bushels_per_acre"</span>: <span class="json-num">168</span>, <span class="json-key">"confidence"</span>: <span class="json-num">0.81</span> },
+  <span class="json-key">"weather_risk_score"</span>: <span class="json-num">0.22</span>,
+  <span class="json-key">"repayment_date"</span>: <span class="json-str">"2027-10-01"</span>,
+  <span class="json-key">"insurance_linked"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"insurance_policy_id"</span>: <span class="json-str">"INS-USDA-20270415-00312"</span>
+}</pre>
+      </div>
+
+      <div class="endpoint" id="savings">
+        <h2>Savings Products</h2>
+        <div class="endpoint-desc">Create and manage savings accounts including ARS, GLSB, Gas Hedge, SLSA, and Family Vault.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/savings/create</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"user_id"</span>: <span class="json-str">"USR-441829"</span>,
+  <span class="json-key">"product_type"</span>: <span class="json-str">"gas-hedge-savings"</span>,
+  <span class="json-key">"initial_deposit"</span>: <span class="json-num">1000</span>,
+  <span class="json-key">"currency"</span>: <span class="json-str">"USD"</span>,
+  <span class="json-key">"fuel_baseline_gallons_per_month"</span>: <span class="json-num">42</span>
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"account_id"</span>: <span class="json-str">"SVG-GHS-20270811-00781"</span>,
+  <span class="json-key">"product_type"</span>: <span class="json-str">"gas-hedge-savings"</span>,
+  <span class="json-key">"balance"</span>: <span class="json-num">1000.00</span>,
+  <span class="json-key">"base_apy"</span>: <span class="json-num">3.8</span>,
+  <span class="json-key">"hedge_apy_component"</span>: <span class="json-num">1.2</span>,
+  <span class="json-key">"personal_fuel_baseline_usd"</span>: <span class="json-num">3.42</span>,
+  <span class="json-key">"hedge_trigger_price"</span>: <span class="json-num">4.10</span>,
+  <span class="json-key">"hedge_status"</span>: <span class="json-str">"active"</span>,
+  <span class="json-key">"created_at"</span>: <span class="json-str">"2027-08-11T09:14:22Z"</span>
+}</pre>
+      </div>
+
+      <div class="endpoint" id="bridge">
+        <h2>BRIDGE Fund</h2>
+        <div class="endpoint-desc">Invest in and monitor BRIDGE Fund positions. Supports all three tranches and carbon credit tracking.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/bridge/invest</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"investor_id"</span>: <span class="json-str">"INV-82341"</span>,
+  <span class="json-key">"tranche"</span>: <span class="json-str">"senior"</span>,
+  <span class="json-key">"amount"</span>: <span class="json-num">5000</span>,
+  <span class="json-key">"currency"</span>: <span class="json-str">"USD"</span>,
+  <span class="json-key">"sector_preferences"</span>: [<span class="json-str">"infrastructure"</span>, <span class="json-str">"farming"</span>]
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"investment_id"</span>: <span class="json-str">"BRG-20260901-INV-00341"</span>,
+  <span class="json-key">"status"</span>: <span class="json-str">"confirmed"</span>,
+  <span class="json-key">"tranche"</span>: <span class="json-str">"senior"</span>,
+  <span class="json-key">"amount_invested"</span>: <span class="json-num">5000</span>,
+  <span class="json-key">"projected_irr"</span>: <span class="json-num">6.1</span>,
+  <span class="json-key">"next_distribution_date"</span>: <span class="json-str">"2027-01-15"</span>,
+  <span class="json-key">"next_distribution_amount"</span>: <span class="json-num">76.25</span>,
+  <span class="json-key">"carbon_credits_allocated"</span>: <span class="json-num">12</span>,
+  <span class="json-key">"cra_credit_eligible"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"project_allocations"</span>: [
+    { <span class="json-key">"project_id"</span>: <span class="json-str">"PRJ-KE-INFRA-0041"</span>, <span class="json-key">"sector"</span>: <span class="json-str">"infrastructure"</span>, <span class="json-key">"country"</span>: <span class="json-str">"Kenya"</span>, <span class="json-key">"amount"</span>: <span class="json-num">1500</span> },
+    { <span class="json-key">"project_id"</span>: <span class="json-str">"PRJ-IN-FARM-0218"</span>, <span class="json-key">"sector"</span>: <span class="json-str">"farming"</span>, <span class="json-key">"country"</span>: <span class="json-str">"India"</span>, <span class="json-key">"amount"</span>: <span class="json-num">1100</span> },
+    { <span class="json-key">"project_id"</span>: <span class="json-str">"PRJ-NG-ENRG-0087"</span>, <span class="json-key">"sector"</span>: <span class="json-str">"energy"</span>, <span class="json-key">"country"</span>: <span class="json-str">"Nigeria"</span>, <span class="json-key">"amount"</span>: <span class="json-num">1000</span> }
+  ]
+}</pre>
+      </div>
+
+      <div class="endpoint" id="ai-score">
+        <h2>AI Credit Score</h2>
+        <div class="endpoint-desc">Get an AI-computed credit score using 500+ alternative signals. CFPB-compliant with explainability output.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/ai-score/evaluate</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"user_id"</span>: <span class="json-str">"USR-441829"</span>,
+  <span class="json-key">"consent_token"</span>: <span class="json-str">"ctkn_abc123xyz"</span>,
+  <span class="json-key">"signals"</span>: [<span class="json-str">"bank_transactions"</span>, <span class="json-str">"utility_payments"</span>, <span class="json-str">"gig_earnings"</span>]
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"score"</span>: <span class="json-num">724</span>,
+  <span class="json-key">"range"</span>: [<span class="json-num">300</span>, <span class="json-num">850</span>],
+  <span class="json-key">"tier"</span>: <span class="json-str">"good"</span>,
+  <span class="json-key">"signals_used"</span>: <span class="json-num">487</span>,
+  <span class="json-key">"top_positive_factors"</span>: [
+    <span class="json-str">"Consistent utility payment history (36mo)"</span>,
+    <span class="json-str">"Growing gig earnings trend (+18% YoY)"</span>,
+    <span class="json-str">"Low expense volatility score (0.12)"</span>
+  ],
+  <span class="json-key">"top_negative_factors"</span>: [
+    <span class="json-str">"Irregular income cadence (gig)"</span>,
+    <span class="json-str">"Thin credit file — no tradelines"</span>
+  ],
+  <span class="json-key">"cfpb_explanation_id"</span>: <span class="json-str">"EXPL-20261104-82910"</span>,
+  <span class="json-key">"latency_ms"</span>: <span class="json-num">187</span>
+}</pre>
+      </div>
+
+      <div class="endpoint" id="fuel">
+        <h2>Fuel Advance</h2>
+        <div class="endpoint-desc">Trigger and manage fuel micro-advances for gig drivers. AI monitors earnings-to-fuel ratio in real time.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/fuel-advance/trigger</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"driver_id"</span>: <span class="json-str">"DRV-99182"</span>,
+  <span class="json-key">"platform"</span>: <span class="json-str">"doordash"</span>,
+  <span class="json-key">"current_fuel_level_pct"</span>: <span class="json-num">12</span>,
+  <span class="json-key">"earnings_today_usd"</span>: <span class="json-num">84.20</span>
+}
+
+<span class="json-key">// Response (Dummy Data)</span>
+{
+  <span class="json-key">"advance_id"</span>: <span class="json-str">"FUEL-20261104-00029"</span>,
+  <span class="json-key">"triggered"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"amount"</span>: <span class="json-num">45</span>,
+  <span class="json-key">"fee"</span>: <span class="json-num">2.25</span>,
+  <span class="json-key">"repayment_source"</span>: <span class="json-str">"next_3_payouts"</span>,
+  <span class="json-key">"repayment_per_payout"</span>: <span class="json-num">15.75</span>,
+  <span class="json-key">"fuel_credit_issued"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"usable_at_partners"</span>: [<span class="json-str">"Shell"</span>, <span class="json-str">"BP"</span>, <span class="json-str">"Chevron"</span>, <span class="json-str">"Circle K"</span>]
+}</pre>
+      </div>
+
+      <div class="endpoint" id="webhooks">
+        <h2>Webhooks</h2>
+        <div class="endpoint-desc">Subscribe to real-time events for loan status changes, distributions, AI score updates, and overdraft alerts.</div>
+        <div class="method-url"><span class="method post">POST</span><span class="url">/webhooks/subscribe</span></div>
+        <pre><span class="json-key">// Request</span>
+{
+  <span class="json-key">"url"</span>: <span class="json-str">"https://your-server.com/finbridge-webhook"</span>,
+  <span class="json-key">"events"</span>: [
+    <span class="json-str">"loan.approved"</span>,
+    <span class="json-str">"loan.repayment_made"</span>,
+    <span class="json-str">"bridge.distribution_issued"</span>,
+    <span class="json-str">"ai_score.updated"</span>,
+    <span class="json-str">"overdraft.risk_detected"</span>,
+    <span class="json-str">"fuel_advance.triggered"</span>
+  ],
+  <span class="json-key">"secret"</span>: <span class="json-str">"wh_secret_your_signing_key"</span>
+}
+
+<span class="json-key">// Webhook Payload Example — bridge.distribution_issued</span>
+{
+  <span class="json-key">"event"</span>: <span class="json-str">"bridge.distribution_issued"</span>,
+  <span class="json-key">"event_id"</span>: <span class="json-str">"EVT-20270115-00481"</span>,
+  <span class="json-key">"timestamp"</span>: <span class="json-str">"2027-01-15T06:00:00Z"</span>,
+  <span class="json-key">"data"</span>: {
+    <span class="json-key">"investment_id"</span>: <span class="json-str">"BRG-20260901-INV-00341"</span>,
+    <span class="json-key">"amount_usd"</span>: <span class="json-num">76.25</span>,
+    <span class="json-key">"carbon_credits"</span>: <span class="json-num">12</span>,
+    <span class="json-key">"carbon_credit_value_usd"</span>: <span class="json-num">8.40</span>
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links">
+    <a href="index.html">Strategies</a><a href="portal.html">Partner Portal</a><a href="app.html">App</a><a href="api.html">API Docs</a>
+  </div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional platform for demonstration purposes</div>
+</footer>
+</body>
+</html>

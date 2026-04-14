@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onboarding Guide — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.onboard-wrap { max-width:900px; margin:0 auto; padding:3rem 2.5rem; }
+.step-track { display:flex; gap:0; margin-bottom:3rem; overflow-x:auto; }
+.step-item { display:flex; align-items:center; flex:1; min-width:120px; }
+.step-circle { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:13px; font-weight:700; flex-shrink:0; transition:all .2s; cursor:pointer; border:2px solid; }
+.step-circle.done { background:var(--green); border-color:var(--green); color:#fff; }
+.step-circle.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+.step-circle.pending { background:transparent; border-color:var(--border2); color:var(--text3); }
+.step-line { flex:1; height:2px; background:var(--border); }
+.step-line.done { background:var(--green); }
+.step-label { font-size:10px; color:var(--text3); text-align:center; margin-top:4px; white-space:nowrap; }
+.step-col { display:flex; flex-direction:column; align-items:center; }
+.onboard-section { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2rem; margin-bottom:2rem; }
+.onboard-section h2 { font-family:var(--font-head); font-size:1.2rem; font-weight:700; margin-bottom:1rem; }
+.code-block { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.25rem; font-family:var(--font-mono); font-size:12px; line-height:1.8; color:var(--text2); overflow-x:auto; margin-bottom:1rem; }
+.code-block .comment { color:var(--text3); }
+.code-block .keyword { color:#93c5fd; }
+.code-block .string { color:#86efac; }
+.code-block .number { color:#fcd34d; }
+.checklist { display:flex; flex-direction:column; gap:.5rem; }
+.check-item { display:flex; align-items:center; gap:.75rem; padding:8px 12px; background:var(--bg3); border-radius:8px; font-size:13px; color:var(--text2); cursor:pointer; transition:background .15s; }
+.check-item:hover { background:var(--bg); }
+.check-item input[type=checkbox] { accent-color:var(--green); width:16px; height:16px; }
+.check-item.checked { color:var(--text); }
+.partner-type-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+.pt-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
+.pt-title { font-weight:600; font-size:.95rem; margin-bottom:.5rem; }
+.pt-desc { font-size:12px; color:var(--text2); margin-bottom:.75rem; }
+.pt-strategies { font-size:11px; color:var(--accent2); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="compare.html">Compare</a>
+    <a href="bridge-investor.html">BRIDGE Fund</a>
+    <a href="sandbox.html">API Sandbox</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div class="onboard-wrap">
+  <div class="hero-label">Partner Integration</div>
+  <h1 style="font-family:var(--font-head);font-size:2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem">Onboarding Guide</h1>
+  <p style="color:var(--text2);margin-bottom:2.5rem">From signup to first live API call in 4 steps. Estimated time: under 20 minutes.</p>
+
+  <div class="step-track">
+    <div class="step-col"><div class="step-circle done">1</div><div class="step-label">Sign Up</div></div>
+    <div class="step-line done"></div>
+    <div class="step-col"><div class="step-circle done">2</div><div class="step-label">Get Key</div></div>
+    <div class="step-line done"></div>
+    <div class="step-col"><div class="step-circle active">3</div><div class="step-label">Test Sandbox</div></div>
+    <div class="step-line"></div>
+    <div class="step-col"><div class="step-circle pending">4</div><div class="step-label">Go Live</div></div>
+  </div>
+
+  <div class="onboard-section">
+    <h2>Step 1 — Choose your partner type</h2>
+    <div class="partner-type-grid">
+      <div class="pt-card">
+        <div class="pt-title">🏦 Bank / Credit Union</div>
+        <div class="pt-desc">Embed micro-credit products into existing checking accounts. Use AI credit scoring to expand underwriting to thin-file customers. Qualify for CRA credit via BRIDGE Fund investments.</div>
+        <div class="pt-strategies">Recommended: AI Credit Engine · Gig Micro-Credit · BRIDGE Fund · Predictive Overdraft</div>
+      </div>
+      <div class="pt-card">
+        <div class="pt-title">📱 Gig Platform</div>
+        <div class="pt-desc">Embed Fuel Advances and Micro-Credit directly in your driver/worker app. Reduce churn caused by fuel costs or income gaps. Revenue share on every advance originated.</div>
+        <div class="pt-strategies">Recommended: Fuel Advance · Gig Micro-Credit · Adaptive Round-Up</div>
+      </div>
+      <div class="pt-card">
+        <div class="pt-title">🌾 Agricultural Co-op</div>
+        <div class="pt-desc">Offer Harvest Advance loans to member farmers at planting season. AI-underwritten, USDA-linkable, with crop insurance bundling at point of disbursement.</div>
+        <div class="pt-strategies">Recommended: Harvest Advance · AI Credit Engine · Family Resilience Vault</div>
+      </div>
+      <div class="pt-card">
+        <div class="pt-title">📈 Institutional Investor</div>
+        <div class="pt-desc">Invest in the BRIDGE Fund across tranches. Receive CRA credit, quarterly distributions, and carbon credit yield supplements. AI-managed portfolio across 18+ countries.</div>
+        <div class="pt-strategies">Recommended: BRIDGE Fund (all tranches) · Carbon Yield Account</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="onboard-section">
+    <h2>Step 2 — Install the SDK</h2>
+    <div class="code-block"><span class="comment"># Python</span>
+pip install finbridge-sdk
+
+<span class="comment"># Node.js</span>
+npm install @finbridge/sdk
+
+<span class="comment"># Java</span>
+&lt;dependency&gt;
+  &lt;groupId&gt;io.finbridge&lt;/groupId&gt;
+  &lt;artifactId&gt;finbridge-java&lt;/artifactId&gt;
+  &lt;version&gt;1.4.2&lt;/version&gt;
+&lt;/dependency&gt;</div>
+    <div class="code-block"><span class="comment"># Python — initialize client</span>
+<span class="keyword">from</span> finbridge <span class="keyword">import</span> FinBridgeClient
+
+client = FinBridgeClient(
+    api_key=<span class="string">"fb2030_sk_YOUR_KEY_HERE"</span>,
+    environment=<span class="string">"sandbox"</span>  <span class="comment"># or "production"</span>
+)
+
+<span class="comment"># Validate connection</span>
+status = client.auth.validate()
+<span class="keyword">print</span>(status.org_name)  <span class="comment"># → "Acme Community Bank"</span></div>
+  </div>
+
+  <div class="onboard-section">
+    <h2>Step 3 — Run your first sandbox call</h2>
+    <div class="code-block"><span class="comment"># Test: Apply for a Gig Micro-Credit line</span>
+result = client.micro_credit.apply(
+    worker_id=<span class="string">"WKR-89234"</span>,
+    platform=<span class="string">"uber"</span>,
+    requested_amount=<span class="number">500</span>,
+    purpose=<span class="string">"vehicle_maintenance"</span>
+)
+
+<span class="keyword">print</span>(result.application_id)   <span class="comment"># → MCA-20261104-00918</span>
+<span class="keyword">print</span>(result.status)           <span class="comment"># → "approved"</span>
+<span class="keyword">print</span>(result.approved_amount)  <span class="comment"># → 500</span>
+<span class="keyword">print</span>(result.ai_score)         <span class="comment"># → 724</span></div>
+
+    <div class="code-block"><span class="comment"># Test: Subscribe to webhooks</span>
+webhook = client.webhooks.subscribe(
+    url=<span class="string">"https://your-server.com/finbridge-events"</span>,
+    events=[
+        <span class="string">"loan.approved"</span>,
+        <span class="string">"loan.repayment_made"</span>,
+        <span class="string">"fuel_advance.triggered"</span>,
+        <span class="string">"bridge.distribution_issued"</span>
+    ]
+)
+<span class="keyword">print</span>(webhook.signing_secret)  <span class="comment"># Store this to verify webhook signatures</span></div>
+
+    <div class="code-block"><span class="comment"># Verify webhook signatures (Python + Flask)</span>
+<span class="keyword">import</span> hmac, hashlib
+
+<span class="keyword">def</span> verify_webhook(payload_bytes, signature_header, secret):
+    expected = hmac.new(
+        secret.encode(), payload_bytes, hashlib.sha256
+    ).hexdigest()
+    <span class="keyword">return</span> hmac.compare_digest(<span class="string">"sha256="</span> + expected, signature_header)
+
+<span class="comment"># In your Flask handler:</span>
+@app.route(<span class="string">"/finbridge-events"</span>, methods=[<span class="string">"POST"</span>])
+<span class="keyword">def</span> handle_webhook():
+    payload = request.get_data()
+    sig = request.headers.get(<span class="string">"X-FinBridge-Signature"</span>)
+    <span class="keyword">if not</span> verify_webhook(payload, sig, WEBHOOK_SECRET):
+        <span class="keyword">return</span> <span class="string">"Unauthorized"</span>, <span class="number">401</span>
+    event = request.get_json()
+    <span class="keyword">if</span> event[<span class="string">"event"</span>] == <span class="string">"loan.approved"</span>:
+        handle_loan_approved(event[<span class="string">"data"</span>])
+    <span class="keyword">return</span> <span class="string">"OK"</span>, <span class="number">200</span></div>
+  </div>
+
+  <div class="onboard-section">
+    <h2>Step 4 — Pre-production checklist</h2>
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Partner portal registration complete and API key generated</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> All target strategies selected and scoped in API key permissions</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Sandbox connectivity verified (auth/validate returns 200)</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> At least one end-to-end test per strategy (apply → approve → repay)</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Webhook endpoint live and signature verification implemented</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Webhook events tested for all subscribed event types</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Error handling implemented for 400, 401, 422, 429, 500 responses</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Rate limiting tested — confirm quota management logic in place</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> PII data handling reviewed — no logging of worker_id or investor_id in plaintext</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Compliance sign-off from legal and BSA/AML officer</label>
+      <label class="check-item"><input type="checkbox" onchange="this.parentElement.classList.toggle('checked',this.checked)"> Production API key requested from partner success team</label>
+    </div>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem">
+      <a href="portal.html" class="btn-primary">Go to Partner Portal →</a>
+      <a href="sandbox.html" class="btn-outline">Open API Sandbox</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links"><a href="index.html">Strategies</a><a href="portal.html">Partner Portal</a><a href="app.html">App</a><a href="api.html">API Docs</a></div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional demonstration platform</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "strategy": "community-lending-circle",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for Community Lending Circle (CLC) API. All records are fictional.",
+  "circles": [
+    {
+      "circle_id": "CLC-20261001-00041",
+      "created_at": "2026-10-01T10:00:00Z",
+      "status": "active",
+      "pool_size_usd": 2400,
+      "contribution_per_member_monthly": 200,
+      "cycle_months": 12,
+      "current_cycle": 2,
+      "members": [
+        { "member_id": "MBR-001", "name": "Ana G.", "ai_score": 712, "status": "contributing", "received_payout": false, "payout_position": 3 },
+        { "member_id": "MBR-002", "name": "James O.", "ai_score": 698, "status": "contributing", "received_payout": true, "payout_date": "2026-10-01", "payout_amount": 2400 },
+        { "member_id": "MBR-003", "name": "Fatima R.", "ai_score": 731, "status": "contributing", "received_payout": false, "payout_position": 1 },
+        { "member_id": "MBR-004", "name": "Carlos M.", "ai_score": 688, "status": "contributing", "received_payout": false, "payout_position": 5 },
+        { "member_id": "MBR-005", "name": "Priya K.", "ai_score": 744, "status": "contributing", "received_payout": false, "payout_position": 2 },
+        { "member_id": "MBR-006", "name": "David T.", "ai_score": 701, "status": "contributing", "received_payout": false, "payout_position": 4 },
+        { "member_id": "MBR-007", "name": "Maria L.", "ai_score": 719, "status": "contributing", "received_payout": false, "payout_position": 7 },
+        { "member_id": "MBR-008", "name": "Chen W.", "ai_score": 756, "status": "contributing", "received_payout": false, "payout_position": 6 }
+      ],
+      "ai_group_compatibility_score": 0.87,
+      "default_risk_score": 0.04,
+      "platform_fee_pct": 0.5,
+      "next_payout_date": "2026-12-01",
+      "next_payout_recipient": "MBR-003"
+    }
+  ],
+  "aggregate_stats": {
+    "total_circles_active": 4821,
+    "total_members": 38568,
+    "total_capital_circulated_usd": 92400000,
+    "avg_default_rate_pct": 0.8,
+    "avg_group_size": 8,
+    "countries_active": ["US", "Mexico", "India", "Philippines", "Nigeria", "Ethiopia"]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "strategy": "fuel-advance",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for Fuel Advance Micro-Loan API. All records are fictional.",
+  "advances": [
+    {
+      "advance_id": "FUEL-20261104-00029",
+      "driver_id": "DRV-99182",
+      "platform": "doordash",
+      "triggered_by": "ai_risk_detection",
+      "trigger_reason": "fuel_level_critical_12pct_earnings_insufficient",
+      "amount_usd": 45,
+      "fee_usd": 2.25,
+      "total_repayment_usd": 47.25,
+      "repayment_source": "next_3_payouts",
+      "repayment_per_payout": 15.75,
+      "status": "disbursed",
+      "disbursed_at": "2026-11-04T14:23:11Z",
+      "fuel_credit_issued": true,
+      "usable_at_partners": ["Shell", "BP", "Chevron", "Circle K", "QuikTrip"],
+      "driver_earnings_today": 84.20,
+      "current_fuel_level_pct": 12,
+      "ai_confidence": 0.94
+    },
+    {
+      "advance_id": "FUEL-20261103-00021",
+      "driver_id": "DRV-44218",
+      "platform": "uber",
+      "triggered_by": "driver_request",
+      "amount_usd": 80,
+      "fee_usd": 4.00,
+      "total_repayment_usd": 84.00,
+      "repayment_source": "next_5_payouts",
+      "repayment_per_payout": 16.80,
+      "status": "repaying",
+      "disbursed_at": "2026-11-03T09:14:00Z",
+      "repayments_made": 2,
+      "balance_remaining": 50.40,
+      "fuel_credit_issued": true,
+      "usable_at_partners": ["Shell", "BP", "Chevron", "Circle K", "QuikTrip"]
+    }
+  ],
+  "aggregate_stats": {
+    "avg_advance_amount_usd": 72,
+    "avg_fee_usd": 3.60,
+    "repayment_rate_pct": 98.4,
+    "ai_triggered_pct": 62,
+    "driver_requested_pct": 38,
+    "avg_driver_downtime_prevented_min": 47,
+    "platforms_integrated": ["uber", "doordash", "lyft", "instacart", "amazon_flex"]
+  }
+}

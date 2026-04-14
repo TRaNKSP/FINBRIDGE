@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Sandbox — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.sandbox-wrap { max-width:1100px; margin:0 auto; padding:2.5rem; display:grid; grid-template-columns:260px 1fr; gap:2rem; }
+@media(max-width:768px){ .sandbox-wrap { grid-template-columns:1fr; } }
+.endpoint-nav { position:sticky; top:80px; }
+.endpoint-nav h3 { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.5rem; font-family:var(--font-mono); }
+.ep-group { margin-bottom:1rem; }
+.ep-group-title { font-size:11px; color:var(--text2); font-weight:600; margin-bottom:.25rem; padding:4px 0; }
+.ep-link { display:block; font-size:12px; color:var(--text3); padding:5px 8px; border-radius:5px; cursor:pointer; transition:all .15s; border:none; background:none; font-family:var(--font-body); width:100%; text-align:left; }
+.ep-link:hover { background:var(--bg2); color:var(--text2); }
+.ep-link.active { background:var(--bg3); color:var(--accent2); }
+.method-badge { display:inline-block; font-size:9px; padding:1px 5px; border-radius:3px; margin-right:5px; font-family:var(--font-mono); font-weight:600; }
+.mb-post { background:rgba(59,130,246,.2); color:#93c5fd; }
+.mb-get { background:rgba(34,197,94,.2); color:#86efac; }
+.sandbox-main { min-width:0; }
+.req-panel { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); margin-bottom:1.5rem; overflow:hidden; }
+.panel-header { padding:1rem 1.25rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
+.panel-title { font-family:var(--font-head); font-size:1rem; font-weight:700; }
+.panel-subtitle { font-size:12px; color:var(--text2); }
+.url-bar { display:flex; align-items:center; gap:.75rem; padding:1rem 1.25rem; border-bottom:1px solid var(--border); background:var(--bg3); }
+.url-method { font-family:var(--font-mono); font-size:12px; font-weight:700; padding:4px 10px; border-radius:5px; }
+.url-text { font-family:var(--font-mono); font-size:12px; color:var(--text2); flex:1; }
+.params-section { padding:1.25rem; }
+.param-row { display:flex; gap:.75rem; align-items:flex-start; margin-bottom:.75rem; }
+.param-key { font-family:var(--font-mono); font-size:12px; color:var(--text2); background:var(--bg3); padding:8px 10px; border-radius:6px; min-width:160px; }
+.param-val { flex:1; }
+.param-val input, .param-val select { width:100%; }
+.param-required { font-size:10px; color:var(--coral,#f43f5e); margin-left:4px; }
+.send-btn { background:var(--accent); color:#fff; border:none; padding:10px 24px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; font-family:var(--font-body); transition:background .15s; }
+.send-btn:hover { background:var(--accent2); }
+.response-panel { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
+.response-header { padding:.75rem 1.25rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.response-status { font-family:var(--font-mono); font-size:12px; }
+.status-ok { color:var(--green); }
+.status-err { color:#f43f5e; }
+.response-time { font-family:var(--font-mono); font-size:11px; color:var(--text3); }
+.response-body { padding:1.25rem; max-height:500px; overflow-y:auto; }
+.response-body pre { margin:0; font-size:12px; line-height:1.7; white-space:pre-wrap; word-break:break-word; }
+.empty-response { color:var(--text3); font-size:13px; text-align:center; padding:3rem; font-style:italic; }
+.tab-row { display:flex; border-bottom:1px solid var(--border); }
+.tab-item { padding:.6rem 1rem; font-size:12px; color:var(--text3); cursor:pointer; border-bottom:2px solid transparent; transition:all .15s; }
+.tab-item.active { color:var(--accent2); border-color:var(--accent2); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="compare.html">Compare</a>
+    <a href="bridge-investor.html">BRIDGE Fund</a>
+    <a href="sandbox.html" class="active">API Sandbox</a>
+    <a href="portal.html">Partner Portal</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div style="padding:1.5rem 2.5rem;border-bottom:1px solid var(--border);max-width:1100px;margin:0 auto">
+  <div class="hero-label">Live API Testing</div>
+  <h1 style="font-family:var(--font-head);font-size:1.8rem;font-weight:800;letter-spacing:-.02em">API Sandbox</h1>
+  <p style="color:var(--text2);font-size:14px;margin-top:.4rem">Test all FinBridge 2030 endpoints with live dummy data responses. No real transactions — all data is fictional.</p>
+  <div style="display:flex;align-items:center;gap:.75rem;margin-top:1rem">
+    <label style="font-size:12px;color:var(--text2)">API Key:</label>
+    <input type="text" id="api-key-input" value="fb2030_sk_DEMO_KEY_SANDBOX_ONLY" style="font-family:var(--font-mono);font-size:12px;width:320px;background:var(--bg2)">
+    <span style="font-size:11px;background:rgba(34,197,94,.15);color:var(--green);padding:2px 8px;border-radius:10px">Sandbox Active</span>
+  </div>
+</div>
+
+<div class="sandbox-wrap">
+  <div class="endpoint-nav">
+    <div class="ep-group">
+      <div class="ep-group-title">Auth</div>
+      <button class="ep-link active" onclick="loadEndpoint('validate-key')"><span class="method-badge mb-post">POST</span> Validate Key</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">Micro-Credit</div>
+      <button class="ep-link" onclick="loadEndpoint('mc-apply')"><span class="method-badge mb-post">POST</span> Apply</button>
+      <button class="ep-link" onclick="loadEndpoint('mc-status')"><span class="method-badge mb-get">GET</span> Status</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">Fuel Advance</div>
+      <button class="ep-link" onclick="loadEndpoint('fuel-trigger')"><span class="method-badge mb-post">POST</span> Trigger</button>
+      <button class="ep-link" onclick="loadEndpoint('fuel-status')"><span class="method-badge mb-get">GET</span> Status</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">Harvest Advance</div>
+      <button class="ep-link" onclick="loadEndpoint('harvest-apply')"><span class="method-badge mb-post">POST</span> Apply</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">Savings</div>
+      <button class="ep-link" onclick="loadEndpoint('savings-create')"><span class="method-badge mb-post">POST</span> Create Account</button>
+      <button class="ep-link" onclick="loadEndpoint('savings-status')"><span class="method-badge mb-get">GET</span> Balance</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">AI Score</div>
+      <button class="ep-link" onclick="loadEndpoint('ai-score')"><span class="method-badge mb-post">POST</span> Evaluate</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">BRIDGE Fund</div>
+      <button class="ep-link" onclick="loadEndpoint('bridge-invest')"><span class="method-badge mb-post">POST</span> Invest</button>
+      <button class="ep-link" onclick="loadEndpoint('bridge-portfolio')"><span class="method-badge mb-get">GET</span> Portfolio</button>
+    </div>
+    <div class="ep-group">
+      <div class="ep-group-title">Webhooks</div>
+      <button class="ep-link" onclick="loadEndpoint('webhook-sub')"><span class="method-badge mb-post">POST</span> Subscribe</button>
+    </div>
+  </div>
+
+  <div class="sandbox-main">
+    <div class="req-panel">
+      <div class="panel-header">
+        <div><div class="panel-title" id="ep-title">Validate API Key</div><div class="panel-subtitle" id="ep-sub">Confirm your API key is active and check enabled strategies</div></div>
+      </div>
+      <div class="url-bar">
+        <span class="url-method" id="ep-method-badge" style="background:rgba(59,130,246,.2);color:#93c5fd">POST</span>
+        <span class="url-text" id="ep-url">https://sandbox.finbridge2030.io/v1/auth/validate</span>
+      </div>
+      <div class="params-section">
+        <div id="params-container"></div>
+        <button class="send-btn" onclick="sendRequest()">Send Request →</button>
+      </div>
+    </div>
+
+    <div class="response-panel">
+      <div class="tab-row">
+        <div class="tab-item active">Response</div>
+        <div class="tab-item" onclick="showCurl()">cURL</div>
+      </div>
+      <div class="response-header">
+        <div class="response-status" id="res-status"><span style="color:var(--text3)">— Awaiting request —</span></div>
+        <div class="response-time" id="res-time"></div>
+      </div>
+      <div class="response-body">
+        <pre id="response-output"><span style="color:var(--text3);font-style:italic">Press "Send Request" to test the endpoint.</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links"><a href="index.html">Strategies</a><a href="portal.html">Portal</a><a href="api.html">API Docs</a></div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional demonstration platform</div>
+</footer>
+
+<script>
+const ENDPOINTS = {
+  'validate-key': {
+    title:'Validate API Key', sub:'Confirm your key is active and check enabled strategies',
+    method:'POST', url:'/auth/validate',
+    params:[ {key:'api_key',type:'text',default:'fb2030_sk_DEMO_KEY_SANDBOX_ONLY',required:true}, {key:'partner_id',type:'text',default:'PTNR-ABC123-DEF456',required:true} ],
+    response:() => ({ valid:true, partner_id:'PTNR-ABC123-DEF456', org_name:'Acme Community Bank', environment:'sandbox', strategies_enabled:['gig-micro-credit','harvest-advance','bridge-fund','fuel-advance','gas-hedge-savings'], quota_remaining:48291, expires_at:'2027-04-13T00:00:00Z' })
+  },
+  'mc-apply': {
+    title:'Apply for Micro-Credit', sub:'Submit a micro-credit line application for a gig worker',
+    method:'POST', url:'/micro-credit/apply',
+    params:[ {key:'worker_id',type:'text',default:'WKR-89234',required:true}, {key:'platform',type:'select',options:['uber','doordash','lyft','instacart','taskrabbit'],default:'uber'}, {key:'requested_amount',type:'number',default:'500',required:true}, {key:'purpose',type:'select',options:['vehicle_maintenance','fuel','equipment','living_expenses'],default:'vehicle_maintenance'} ],
+    response:(p) => ({ application_id:'MCA-'+Date.now()+'-00918', status:'approved', approved_amount:parseInt(p.requested_amount||500), credit_limit:850, apr:18.5, repayment_pct_of_payout:15, disbursed_at:new Date().toISOString(), ai_score:724, estimated_payoff_payouts:4, platform:p.platform||'uber', worker_id:p.worker_id })
+  },
+  'mc-status': {
+    title:'Get Micro-Credit Status', sub:'Check balance and repayment status for an application',
+    method:'GET', url:'/micro-credit/{application_id}',
+    params:[ {key:'application_id',type:'text',default:'MCA-20261104-00918',required:true} ],
+    response:(p) => ({ application_id:p.application_id, status:'active', balance_outstanding:312.40, original_amount:500, payments_made:2, next_repayment_trigger:'next_payout', next_repayment_amount:93.72, platform:'uber', disbursed_at:'2026-11-04T14:23:11Z' })
+  },
+  'fuel-trigger': {
+    title:'Trigger Fuel Advance', sub:'Initiate a fuel advance for a driver at risk of stranding',
+    method:'POST', url:'/fuel-advance/trigger',
+    params:[ {key:'driver_id',type:'text',default:'DRV-99182',required:true}, {key:'platform',type:'select',options:['uber','doordash','lyft','instacart'],default:'doordash'}, {key:'current_fuel_level_pct',type:'number',default:'12'}, {key:'earnings_today_usd',type:'number',default:'84.20'} ],
+    response:(p) => ({ advance_id:'FUEL-'+Date.now()+'-00029', triggered:true, amount:45, fee:2.25, total_repayment:47.25, repayment_source:'next_3_payouts', repayment_per_payout:15.75, fuel_credit_issued:true, usable_at_partners:['Shell','BP','Chevron','Circle K','QuikTrip'], driver_id:p.driver_id, ai_confidence:0.94 })
+  },
+  'fuel-status': {
+    title:'Get Fuel Advance Status', sub:'Check repayment progress on a fuel advance',
+    method:'GET', url:'/fuel-advance/{advance_id}',
+    params:[ {key:'advance_id',type:'text',default:'FUEL-20261104-00029',required:true} ],
+    response:(p) => ({ advance_id:p.advance_id, status:'repaying', amount:45, repayments_made:2, balance_remaining:13.50, next_deduction:'next_payout', platform:'doordash', issued_at:'2026-11-04T14:23:11Z' })
+  },
+  'harvest-apply': {
+    title:'Apply for Harvest Advance', sub:'Submit a seasonal agricultural loan application',
+    method:'POST', url:'/harvest-advance/apply',
+    params:[ {key:'farm_id',type:'text',default:'FARM-TN-00412',required:true}, {key:'crop_type',type:'select',options:['corn','soybeans','wheat','cotton','sorghum'],default:'corn'}, {key:'acres',type:'number',default:'85'}, {key:'requested_amount',type:'number',default:'7500',required:true}, {key:'state',type:'text',default:'TN'} ],
+    response:(p) => ({ loan_id:'HARV-'+Date.now()+'-00312', status:'approved', approved_amount:parseInt(p.requested_amount||7500), apr:11.2, crop_type:p.crop_type, acres:parseInt(p.acres||85), ai_yield_forecast:{ bushels_per_acre:168, confidence:0.81 }, weather_risk_score:0.22, repayment_date:'2027-10-15', insurance_linked:true, insurance_policy_id:'INS-USDA-'+Date.now() })
+  },
+  'savings-create': {
+    title:'Create Savings Account', sub:'Open a new savings product account for a user',
+    method:'POST', url:'/savings/create',
+    params:[ {key:'user_id',type:'text',default:'USR-441829',required:true}, {key:'product_type',type:'select',options:['adaptive-round-up-savings','goal-linked-savings-bond','gas-hedge-savings','skills-linked-savings','family-resilience-vault'],default:'gas-hedge-savings'}, {key:'initial_deposit',type:'number',default:'1000'} ],
+    response:(p) => ({ account_id:'SVG-'+p.product_type.toUpperCase().slice(0,3)+'-'+Date.now(), product_type:p.product_type, balance:parseFloat(p.initial_deposit||1000), base_apy:3.8, status:'active', created_at:new Date().toISOString(), user_id:p.user_id })
+  },
+  'savings-status': {
+    title:'Get Savings Balance', sub:'Retrieve balance and status for a savings account',
+    method:'GET', url:'/savings/{account_id}',
+    params:[ {key:'account_id',type:'text',default:'SVG-GHS-20270811-00781',required:true} ],
+    response:(p) => ({ account_id:p.account_id, balance:2400.00, base_apy:3.8, combined_apy:5.0, hedge_active:true, hedge_credits_ytd_usd:184.20, status:'active' })
+  },
+  'ai-score': {
+    title:'AI Credit Score Evaluation', sub:'Get AI-computed credit score with CFPB-compliant explanation',
+    method:'POST', url:'/ai-score/evaluate',
+    params:[ {key:'user_id',type:'text',default:'USR-441829',required:true}, {key:'consent_token',type:'text',default:'ctkn_abc123xyz',required:true}, {key:'signals',type:'text',default:'bank_transactions,utility_payments,gig_earnings'} ],
+    response:(p) => ({ evaluation_id:'AICS-'+Date.now(), user_id:p.user_id, score:724, range:[300,850], tier:'good', signals_used:487, top_positive_factors:['Consistent utility payment history (36mo)','Growing gig earnings trend (+18% YoY)','Low expense volatility score (0.12)'], top_negative_factors:['Irregular income cadence (gig)','Thin credit file — no tradelines'], cfpb_explanation_id:'EXPL-'+Date.now(), latency_ms:187 })
+  },
+  'bridge-invest': {
+    title:'BRIDGE Fund — Invest', sub:'Commit capital to the BRIDGE Impact Fund',
+    method:'POST', url:'/bridge/invest',
+    params:[ {key:'investor_id',type:'text',default:'INV-82341',required:true}, {key:'tranche',type:'select',options:['senior','mezzanine','impact_equity'],default:'senior'}, {key:'amount',type:'number',default:'5000',required:true}, {key:'sector_preferences',type:'text',default:'infrastructure,farming'} ],
+    response:(p) => {
+      const rates = {senior:[0.055,0.065],mezzanine:[0.07,0.085],impact_equity:[0.09,0.12]};
+      const r = rates[p.tranche||'senior']; const amt = parseFloat(p.amount||5000);
+      return { investment_id:'BRG-'+Date.now(), status:'confirmed', tranche:p.tranche, amount_invested:amt, projected_irr_low:r[0]*100, projected_irr_high:r[1]*100, next_distribution_date:'2027-01-15', next_distribution_amount:Math.round(amt*((r[0]+r[1])/2)/4*100)/100, carbon_credits_allocated:Math.round(amt/1000*2.4), cra_credit_eligible:true, project_allocations:[{project_id:'PRJ-KE-INFRA-0041',country:'Kenya',sector:'infrastructure',amount:Math.round(amt*0.3)},{project_id:'PRJ-IN-FARM-0218',country:'India',sector:'farming',amount:Math.round(amt*0.22)}] };
+    }
+  },
+  'bridge-portfolio': {
+    title:'BRIDGE Fund — Portfolio', sub:'Get investor portfolio summary and distributions',
+    method:'GET', url:'/bridge/portfolio/{investor_id}',
+    params:[ {key:'investor_id',type:'text',default:'INV-82341',required:true} ],
+    response:(p) => ({ investor_id:p.investor_id, total_invested:5000, current_value:5153.75, total_distributions_received:76.25, carbon_credits_earned:12, cra_credit_value:5000, irr_to_date:6.1, projects_active:5, next_distribution_date:'2027-04-15' })
+  },
+  'webhook-sub': {
+    title:'Subscribe to Webhooks', sub:'Register a URL to receive real-time event notifications',
+    method:'POST', url:'/webhooks/subscribe',
+    params:[ {key:'url',type:'text',default:'https://your-server.com/finbridge-webhook',required:true}, {key:'events',type:'text',default:'loan.approved,bridge.distribution_issued,fuel_advance.triggered'} ],
+    response:(p) => ({ webhook_id:'WH-'+Date.now(), url:p.url, events:(p.events||'').split(',').map(e=>e.trim()), status:'active', created_at:new Date().toISOString(), signing_secret:'whsec_'+Math.random().toString(36).substr(2,24) })
+  }
+};
+
+let currentEndpoint = 'validate-key';
+
+function loadEndpoint(id) {
+  currentEndpoint = id;
+  const ep = ENDPOINTS[id];
+  document.querySelectorAll('.ep-link').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('ep-title').textContent = ep.title;
+  document.getElementById('ep-sub').textContent = ep.sub;
+  const methodBadge = document.getElementById('ep-method-badge');
+  methodBadge.textContent = ep.method;
+  methodBadge.style.background = ep.method==='GET' ? 'rgba(34,197,94,.2)' : 'rgba(59,130,246,.2)';
+  methodBadge.style.color = ep.method==='GET' ? '#86efac' : '#93c5fd';
+  document.getElementById('ep-url').textContent = 'https://sandbox.finbridge2030.io/v1' + ep.url;
+  const container = document.getElementById('params-container');
+  container.innerHTML = '';
+  ep.params.forEach(param => {
+    const row = document.createElement('div');
+    row.className = 'param-row';
+    let input;
+    if(param.type === 'select') {
+      input = `<select id="param-${param.key}">${param.options.map(o=>`<option value="${o}"${o===param.default?' selected':''}>${o}</option>`).join('')}</select>`;
+    } else {
+      input = `<input type="${param.type}" id="param-${param.key}" value="${param.default||''}" placeholder="${param.key}">`;
+    }
+    row.innerHTML = `<div class="param-key">${param.key}${param.required?'<span class="param-required">*</span>':''}</div><div class="param-val">${input}</div>`;
+    container.appendChild(row);
+  });
+  document.getElementById('res-status').innerHTML = '<span style="color:var(--text3)">— Awaiting request —</span>';
+  document.getElementById('res-time').textContent = '';
+  document.getElementById('response-output').innerHTML = '<span style="color:var(--text3);font-style:italic">Press "Send Request" to test the endpoint.</span>';
+}
+
+function sendRequest() {
+  const ep = ENDPOINTS[currentEndpoint];
+  const params = {};
+  ep.params.forEach(p => { params[p.key] = document.getElementById('param-'+p.key)?.value; });
+  const startTime = Date.now();
+  setTimeout(() => {
+    const latency = Date.now() - startTime + Math.round(Math.random()*80+80);
+    const resp = ep.response(params);
+    const json = JSON.stringify(resp, null, 2);
+    const colored = json
+      .replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:')
+      .replace(/: "([^"]+)"/g, ': <span class="json-str">"$1"</span>')
+      .replace(/: (true|false)/g, ': <span class="json-bool">$1</span>')
+      .replace(/: (\d+\.?\d*)/g, ': <span class="json-num">$1</span>');
+    document.getElementById('res-status').innerHTML = '<span class="status-ok">200 OK</span>';
+    document.getElementById('res-time').textContent = latency + 'ms';
+    document.getElementById('response-output').innerHTML = colored;
+  }, 300 + Math.random()*200);
+  document.getElementById('res-status').innerHTML = '<span style="color:var(--amber)">⟳ Sending...</span>';
+}
+
+function showCurl() {
+  const ep = ENDPOINTS[currentEndpoint];
+  const params = {};
+  ep.params.forEach(p => { params[p.key] = document.getElementById('param-'+p.key)?.value || p.default; });
+  const key = document.getElementById('api-key-input').value;
+  const url = 'https://sandbox.finbridge2030.io/v1' + ep.url;
+  let curl = `curl -X ${ep.method} "${url}" \\\n  -H "Authorization: Bearer ${key}" \\\n  -H "Content-Type: application/json"`;
+  if(ep.method === 'POST') {
+    curl += ` \\\n  -d '${JSON.stringify(params, null, 2)}'`;
+  }
+  document.getElementById('response-output').textContent = curl;
+  document.getElementById('res-status').innerHTML = '<span style="color:var(--text2)">cURL command</span>';
+}
+
+loadEndpoint('validate-key');
+</script>
+</body>
+</html>

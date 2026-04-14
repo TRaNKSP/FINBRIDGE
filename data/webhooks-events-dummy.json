@@ -1,0 +1,133 @@
+{
+  "strategy": "webhooks-events",
+  "version": "v1",
+  "environment": "sandbox",
+  "description": "Sample webhook payloads for all event types. Use for integration testing.",
+  "events": {
+    "loan.approved": {
+      "event": "loan.approved",
+      "event_id": "EVT-20261104-001",
+      "timestamp": "2026-11-04T14:23:11Z",
+      "data": {
+        "application_id": "MCA-20261104-00918",
+        "worker_id": "WKR-89234",
+        "platform": "uber",
+        "approved_amount": 500,
+        "apr": 18.5,
+        "status": "approved"
+      }
+    },
+    "loan.repayment_made": {
+      "event": "loan.repayment_made",
+      "event_id": "EVT-20261107-002",
+      "timestamp": "2026-11-07T18:41:00Z",
+      "data": {
+        "application_id": "MCA-20261104-00918",
+        "payment_id": "PMT-001",
+        "amount_paid": 93.72,
+        "balance_remaining": 406.28,
+        "source": "uber_payout",
+        "payout_id": "POUT-20261107-00481"
+      }
+    },
+    "loan.fully_repaid": {
+      "event": "loan.fully_repaid",
+      "event_id": "EVT-20261120-003",
+      "timestamp": "2026-11-20T09:12:00Z",
+      "data": {
+        "application_id": "MCA-20261104-00918",
+        "total_paid": 511.40,
+        "interest_paid": 11.40,
+        "days_to_repay": 16,
+        "new_credit_limit": 850
+      }
+    },
+    "fuel_advance.triggered": {
+      "event": "fuel_advance.triggered",
+      "event_id": "EVT-20261104-004",
+      "timestamp": "2026-11-04T14:23:11Z",
+      "data": {
+        "advance_id": "FUEL-20261104-00029",
+        "driver_id": "DRV-99182",
+        "platform": "doordash",
+        "amount": 45,
+        "trigger_type": "ai_auto_detection",
+        "fuel_level_pct_at_trigger": 12
+      }
+    },
+    "bridge.distribution_issued": {
+      "event": "bridge.distribution_issued",
+      "event_id": "EVT-20270115-005",
+      "timestamp": "2027-01-15T06:00:00Z",
+      "data": {
+        "investment_id": "BRG-20260901-INV-00341",
+        "investor_id": "INV-82341",
+        "distribution_id": "DIST-Q12027-00341",
+        "amount_usd": 76.25,
+        "carbon_credits": 12,
+        "carbon_credit_value_usd": 8.40,
+        "quarter": "Q1-2027"
+      }
+    },
+    "ai_score.updated": {
+      "event": "ai_score.updated",
+      "event_id": "EVT-20261104-006",
+      "timestamp": "2026-11-04T15:00:00Z",
+      "data": {
+        "user_id": "USR-441829",
+        "previous_score": 718,
+        "new_score": 724,
+        "score_change": 6,
+        "reason": "3_consecutive_on_time_repayments",
+        "new_tier": "good"
+      }
+    },
+    "overdraft.risk_detected": {
+      "event": "overdraft.risk_detected",
+      "event_id": "EVT-20261108-007",
+      "timestamp": "2026-11-08T08:30:00Z",
+      "data": {
+        "user_id": "USR-441829",
+        "risk_level": "high",
+        "projected_overdraft_date": "2026-11-12",
+        "projected_overdraft_amount": -142.80,
+        "ai_action_taken": "moved_funds_from_savings",
+        "amount_moved": 150.00,
+        "source_account": "SVG-ARS-20261001-00481"
+      }
+    },
+    "savings.milestone_reached": {
+      "event": "savings.milestone_reached",
+      "event_id": "EVT-20261012-008",
+      "timestamp": "2026-10-12T11:20:00Z",
+      "data": {
+        "account_id": "SVG-GLSB-20261015-00192",
+        "user_id": "USR-887341",
+        "milestone_pct": 50,
+        "new_apy": 4.5,
+        "balance_at_milestone": 25000,
+        "goal_type": "home_down_payment"
+      }
+    },
+    "harvest_advance.repayment_due": {
+      "event": "harvest_advance.repayment_due",
+      "event_id": "EVT-20271001-009",
+      "timestamp": "2027-10-01T06:00:00Z",
+      "data": {
+        "loan_id": "HARV-20270415-00312",
+        "farm_id": "FARM-TN-00412",
+        "repayment_amount": 7920.00,
+        "principal": 7500,
+        "interest": 420,
+        "due_date": "2027-10-15",
+        "days_until_due": 14
+      }
+    }
+  },
+  "webhook_verification": {
+    "header_name": "X-FinBridge-Signature",
+    "format": "sha256={hmac_sha256_of_payload}",
+    "example_secret": "whsec_abc123def456ghi789jkl012mno345pqr",
+    "python_verification_snippet": "import hmac, hashlib\ndef verify(payload_bytes, signature, secret):\n    expected = 'sha256=' + hmac.new(secret.encode(), payload_bytes, hashlib.sha256).hexdigest()\n    return hmac.compare_digest(expected, signature)"
+  }
+}

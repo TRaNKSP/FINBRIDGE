@@ -1,0 +1,120 @@
+{
+  "strategy": "bridge-fund",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for BRIDGE Impact Fund API. All records are fictional.",
+  "fund_summary": {
+    "fund_name": "FinBridge BRIDGE Fund I",
+    "total_aum_usd": 247000000,
+    "target_aum_usd": 25000000000,
+    "investors_count": 1842,
+    "projects_active": 34,
+    "countries": 18,
+    "inception_date": "2026-01-15"
+  },
+  "investors": [
+    {
+      "investor_id": "INV-82341",
+      "type": "retail",
+      "tranche": "senior",
+      "amount_invested": 5000,
+      "current_value": 5153.75,
+      "irr_realized_pct": 6.1,
+      "carbon_credits_earned": 12,
+      "carbon_credit_value_usd": 8.40,
+      "cra_credit_eligible": true,
+      "distributions": [
+        { "dist_id": "DIST-Q12027-00341", "date": "2027-01-15", "amount_usd": 76.25, "carbon_credits": 12 }
+      ],
+      "project_allocations": [
+        { "project_id": "PRJ-KE-INFRA-0041", "sector": "infrastructure", "country": "Kenya", "amount": 1500, "status": "performing" },
+        { "project_id": "PRJ-IN-FARM-0218", "sector": "farming", "country": "India", "amount": 1100, "status": "performing" },
+        { "project_id": "PRJ-NG-ENRG-0087", "sector": "energy", "country": "Nigeria", "amount": 1000, "status": "performing" },
+        { "project_id": "PRJ-BR-GIG-0034", "sector": "gig_economy", "country": "Brazil", "amount": 900, "status": "performing" },
+        { "project_id": "PRJ-US-MCL-0012", "sector": "micro_loans", "country": "United States", "amount": 500, "status": "performing" }
+      ]
+    },
+    {
+      "investor_id": "INV-91042",
+      "type": "institutional",
+      "tranche": "impact_equity",
+      "amount_invested": 2000000,
+      "current_value": 2148000,
+      "irr_realized_pct": 9.8,
+      "carbon_credits_earned": 4820,
+      "carbon_credit_value_usd": 3374,
+      "cra_credit_eligible": true,
+      "bank_name": "First Midwest Community Bank",
+      "distributions": [
+        { "dist_id": "DIST-Q12027-00142", "date": "2027-01-15", "amount_usd": 49000, "carbon_credits": 4820 }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "project_id": "PRJ-KE-INFRA-0041",
+      "name": "Nairobi Last-Mile Road Network Phase 2",
+      "sector": "infrastructure",
+      "country": "Kenya",
+      "region": "Nairobi Metro",
+      "total_project_value_usd": 18400000,
+      "bridge_fund_stake_usd": 3200000,
+      "status": "construction",
+      "expected_irr_pct": 8.4,
+      "jobs_created": 412,
+      "beneficiaries": 84000,
+      "carbon_offset_tons": 1840,
+      "completion_date": "2028-06-01",
+      "ai_risk_score": 0.18
+    },
+    {
+      "project_id": "PRJ-IN-FARM-0218",
+      "name": "Maharashtra Smallholder Irrigation Collective",
+      "sector": "farming",
+      "country": "India",
+      "region": "Maharashtra",
+      "total_project_value_usd": 4200000,
+      "bridge_fund_stake_usd": 1800000,
+      "status": "operational",
+      "expected_irr_pct": 7.1,
+      "jobs_created": 1240,
+      "beneficiaries": 3400,
+      "acres_improved": 12800,
+      "yield_improvement_pct": 34,
+      "carbon_offset_tons": 620,
+      "ai_risk_score": 0.14
+    },
+    {
+      "project_id": "PRJ-NG-ENRG-0087",
+      "name": "Lagos Peri-Urban Solar Micro-Grid",
+      "sector": "energy",
+      "country": "Nigeria",
+      "region": "Lagos State",
+      "total_project_value_usd": 6800000,
+      "bridge_fund_stake_usd": 2100000,
+      "status": "operational",
+      "expected_irr_pct": 9.2,
+      "households_served": 8200,
+      "mw_capacity": 4.8,
+      "carbon_offset_tons": 3840,
+      "gas_displaced_barrels": 18400,
+      "ai_risk_score": 0.21
+    },
+    {
+      "project_id": "PRJ-BR-GIG-0034",
+      "name": "São Paulo Gig Worker Financial Hub",
+      "sector": "gig_economy",
+      "country": "Brazil",
+      "region": "São Paulo",
+      "total_project_value_usd": 3100000,
+      "bridge_fund_stake_usd": 1400000,
+      "status": "operational",
+      "expected_irr_pct": 11.4,
+      "workers_served": 28000,
+      "loans_originated_usd": 8200000,
+      "default_rate_pct": 2.1,
+      "ai_risk_score": 0.19
+    }
+  ]
+}

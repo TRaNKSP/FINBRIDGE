@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Portal — FinBridge 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">FIN<span>BRIDGE</span> 2030</div>
+  <div class="nav-links">
+    <a href="index.html">Strategies</a>
+    <a href="portal.html" class="active">Partner Portal</a>
+    <a href="app.html">Mobile App</a>
+    <a href="api.html">API Docs</a>
+  </div>
+  <a href="portal.html" class="nav-cta">Get API Key →</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="hero-label">Partner Onboarding</div>
+  <h1 class="page-title">Partner Portal</h1>
+  <p class="page-sub">Sign up, select your strategies, obtain your API key, and start integrating in under 10 minutes. Dummy data available immediately on signup.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem">
+    <div class="form-card" style="cursor:pointer;border-color:rgba(59,130,246,.4)" onclick="setType('bank')">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(59,130,246,.15);display:flex;align-items:center;justify-content:center;font-size:20px">🏦</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:1rem">Bank / Lender</div>
+          <div style="font-size:12px;color:var(--text2)">Credit unions, community banks, fintechs</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card" style="cursor:pointer" onclick="setType('platform')">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(139,92,246,.15);display:flex;align-items:center;justify-content:center;font-size:20px">📱</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:1rem">Platform / App</div>
+          <div style="font-size:12px;color:var(--text2)">Gig platforms, employer apps, EV/transit</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card" style="cursor:pointer" onclick="setType('investor')">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(34,197,94,.15);display:flex;align-items:center;justify-content:center;font-size:20px">📈</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:1rem">Investor</div>
+          <div style="font-size:12px;color:var(--text2)">BRIDGE Fund, impact investing, CRA</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card" style="cursor:pointer" onclick="setType('government')">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(251,191,36,.15);display:flex;align-items:center;justify-content:center;font-size:20px">🏛️</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:1rem">Government / NGO</div>
+          <div style="font-size:12px;color:var(--text2)">USDA, DFC, workforce development</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>Organization Details</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Organization Name *</label>
+        <input type="text" id="org-name" placeholder="Acme Community Bank">
+      </div>
+      <div class="form-group">
+        <label>Partner Type</label>
+        <select id="partner-type">
+          <option value="">Select type...</option>
+          <option value="bank">Bank / Credit Union</option>
+          <option value="fintech">Fintech / Lender</option>
+          <option value="gig-platform">Gig Platform</option>
+          <option value="employer">Employer</option>
+          <option value="ev-oem">EV / Transit OEM</option>
+          <option value="investor">Institutional Investor</option>
+          <option value="government">Government / NGO</option>
+          <option value="agri">Agricultural Co-op</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Primary Contact Name *</label>
+        <input type="text" id="contact-name" placeholder="Jane Smith">
+      </div>
+      <div class="form-group">
+        <label>Business Email *</label>
+        <input type="email" id="contact-email" placeholder="jane@acmebank.com">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" id="contact-phone" placeholder="+1 (555) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <select id="country">
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="GB">United Kingdom</option>
+          <option value="NG">Nigeria</option>
+          <option value="IN">India</option>
+          <option value="BR">Brazil</option>
+          <option value="KE">Kenya</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estimated Monthly API Calls</label>
+        <select id="api-volume">
+          <option value="low">Under 10,000</option>
+          <option value="medium">10,000 – 500,000</option>
+          <option value="high">500K – 5M</option>
+          <option value="enterprise">5M+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Use Environment</label>
+        <select id="environment">
+          <option value="sandbox">Sandbox / Testing</option>
+          <option value="production">Production</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Business Description</label>
+        <textarea id="biz-desc" placeholder="Briefly describe how you plan to use FinBridge APIs..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>Select Strategies to Access</h2>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem">Choose the financial product strategies you want API access to. You'll receive separate keys per strategy or a unified key with scoped permissions.</p>
+    <div class="strategy-select-grid" id="strategy-checkboxes"></div>
+  </div>
+
+  <div class="form-card">
+    <h2>Compliance &amp; Agreement</h2>
+    <div style="display:flex;flex-direction:column;gap:.75rem">
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;font-size:13px;color:var(--text2)">
+        <input type="checkbox" id="agree-terms" style="margin-top:3px;accent-color:var(--accent)">
+        I agree to the FinBridge 2030 Partner Terms of Service and API Usage Policy
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;font-size:13px;color:var(--text2)">
+        <input type="checkbox" id="agree-compliance" style="margin-top:3px;accent-color:var(--accent)">
+        I confirm my organization complies with applicable financial regulations (BSA/AML, KYC, relevant local law)
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;font-size:13px;color:var(--text2)">
+        <input type="checkbox" id="agree-data" style="margin-top:3px;accent-color:var(--accent)">
+        I acknowledge that sandbox data is fictional and not for production use
+      </label>
+    </div>
+  </div>
+
+  <button class="btn-primary" onclick="submitPartner()" style="width:100%;padding:14px;font-size:15px;margin-bottom:1rem">Generate API Key &amp; Onboard →</button>
+
+  <div class="key-display" id="key-display">
+    <div class="key-label">Your API Key (keep this secret)</div>
+    <div class="key-value" id="key-value"></div>
+    <div class="key-label" style="margin-top:1rem">Partner ID</div>
+    <div class="key-value" id="partner-id"></div>
+    <div class="key-label" style="margin-top:1rem">Sandbox Base URL</div>
+    <div class="key-value">https://sandbox.finbridge2030.io/v1</div>
+    <div class="key-label" style="margin-top:1rem">Strategies Enabled</div>
+    <div id="enabled-strategies" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem"></div>
+    <div class="key-note">Your key is now active on the sandbox environment. Test with dummy data immediately using the <a href="api.html" style="color:var(--accent2)">API Reference →</a></div>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem">
+      <button class="btn-primary" onclick="copyKey()">Copy API Key</button>
+      <a href="api.html" class="btn-outline">View API Docs →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">FINBRIDGE 2030</div>
+  <div class="footer-links">
+    <a href="index.html">Strategies</a><a href="portal.html">Partner Portal</a><a href="app.html">App</a><a href="api.html">API Docs</a>
+  </div>
+  <div class="footer-note">© 2026 FinBridge 2030 · Fictional platform for demonstration purposes</div>
+</footer>
+
+<script src="js/strategies.js"></script>
+<script>
+function setType(t) {
+  document.querySelectorAll('.form-card').forEach(c => c.style.borderColor = '');
+  document.getElementById('partner-type').value = t;
+}
+
+function renderCheckboxes() {
+  const container = document.getElementById('strategy-checkboxes');
+  STRATEGIES.forEach(s => {
+    const item = document.createElement('label');
+    item.className = 'strat-select-item';
+    item.innerHTML = `<input type="checkbox" name="strat" value="${s.id}" style="accent-color:var(--accent)"> ${s.num} ${s.name}`;
+    container.appendChild(item);
+  });
+}
+
+function generateKey() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let key = 'fb2030_sk_';
+  for (let i = 0; i < 40; i++) key += chars[Math.floor(Math.random() * chars.length)];
+  return key;
+}
+
+function generatePartnerId() {
+  return 'PTNR-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2,6).toUpperCase();
+}
+
+function submitPartner() {
+  const org = document.getElementById('org-name').value;
+  const email = document.getElementById('contact-email').value;
+  const terms = document.getElementById('agree-terms').checked;
+  const comp = document.getElementById('agree-compliance').checked;
+  const data = document.getElementById('agree-data').checked;
+  if (!org || !email) { alert('Please fill in organization name and email.'); return; }
+  if (!terms || !comp || !data) { alert('Please agree to all compliance terms.'); return; }
+  const selected = [...document.querySelectorAll('input[name=strat]:checked')].map(i => i.value);
+  if (selected.length === 0) { alert('Please select at least one strategy.'); return; }
+
+  document.getElementById('key-value').textContent = generateKey();
+  document.getElementById('partner-id').textContent = generatePartnerId();
+  const enabledDiv = document.getElementById('enabled-strategies');
+  enabledDiv.innerHTML = selected.map(id => {
+    const s = STRATEGIES.find(x => x.id === id);
+    return `<span class="tag tag-${s.categories[0]}">${s.num} ${s.name}</span>`;
+  }).join('');
+  const display = document.getElementById('key-display');
+  display.classList.add('show');
+  display.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyKey() {
+  navigator.clipboard.writeText(document.getElementById('key-value').textContent);
+  alert('API key copied to clipboard!');
+}
+
+renderCheckboxes();
+</script>
+</body>
+</html>

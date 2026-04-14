@@ -1,0 +1,58 @@
+{
+  "strategy": "ai-credit-score",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy AI credit score evaluations. All records are fictional.",
+  "scores": [
+    {
+      "evaluation_id": "AICS-20261104-00918",
+      "user_id": "USR-441829",
+      "score": 724,
+      "score_range": [300, 850],
+      "tier": "good",
+      "signals_used": 487,
+      "evaluated_at": "2026-11-04T14:23:11Z",
+      "latency_ms": 187,
+      "top_positive_factors": [
+        "Consistent utility payment history (36 months)",
+        "Growing gig earnings trend (+18% YoY)",
+        "Low expense volatility score (0.12)",
+        "Subscription payment reliability (100%)",
+        "Positive cash flow 10 of last 12 months"
+      ],
+      "top_negative_factors": [
+        "Irregular income cadence (gig platform)",
+        "Thin credit file — no tradelines",
+        "High rent-to-income ratio (38%)"
+      ],
+      "recommended_products": ["gig-micro-credit", "adaptive-round-up-savings", "family-resilience-vault"],
+      "cfpb_explanation_id": "EXPL-20261104-82910",
+      "fair_housing_compliant": true
+    },
+    {
+      "evaluation_id": "AICS-20261103-00812",
+      "user_id": "USR-887341",
+      "score": 768,
+      "score_range": [300, 850],
+      "tier": "very_good",
+      "signals_used": 512,
+      "evaluated_at": "2026-11-03T11:08:44Z",
+      "latency_ms": 142,
+      "top_positive_factors": [
+        "Long-term employer income stability (7 years)",
+        "Consistent rent payment (60 months no late)",
+        "Positive monthly savings trend",
+        "Low debt-to-income ratio (18%)",
+        "Multiple income streams"
+      ],
+      "top_negative_factors": [
+        "Recent large discretionary purchase spike",
+        "Limited investment history"
+      ],
+      "recommended_products": ["goal-linked-savings-bond", "bridge-fund-senior", "family-resilience-vault"],
+      "cfpb_explanation_id": "EXPL-20261103-71204",
+      "fair_housing_compliant": true
+    }
+  ]
+}

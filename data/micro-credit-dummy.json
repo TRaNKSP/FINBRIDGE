@@ -1,0 +1,81 @@
+{
+  "strategy": "gig-micro-credit",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for Gig Micro-Credit Line API. All records are fictional.",
+  "workers": [
+    {
+      "worker_id": "WKR-89234",
+      "name": "Marcus T.",
+      "platform": "uber",
+      "monthly_earnings_avg": 3240.00,
+      "earnings_last_30d": 3412.80,
+      "credit_limit": 850,
+      "outstanding_balance": 312.40,
+      "ai_score": 724,
+      "status": "active",
+      "applications": [
+        {
+          "application_id": "MCA-20261104-00918",
+          "applied_at": "2026-11-04T14:23:11Z",
+          "amount_requested": 500,
+          "amount_approved": 500,
+          "apr": 18.5,
+          "purpose": "vehicle_maintenance",
+          "repayment_pct": 15,
+          "status": "active",
+          "payments": [
+            { "payment_id": "PMT-001", "date": "2026-11-07", "amount": 93.72, "source": "uber_payout" },
+            { "payment_id": "PMT-002", "date": "2026-11-11", "amount": 93.88, "source": "uber_payout" }
+          ]
+        }
+      ]
+    },
+    {
+      "worker_id": "WKR-56712",
+      "name": "Aisha L.",
+      "platform": "doordash",
+      "monthly_earnings_avg": 2180.00,
+      "earnings_last_30d": 2340.50,
+      "credit_limit": 600,
+      "outstanding_balance": 0,
+      "ai_score": 691,
+      "status": "eligible",
+      "applications": []
+    },
+    {
+      "worker_id": "WKR-33441",
+      "name": "Raj P.",
+      "platform": "taskrabbit",
+      "monthly_earnings_avg": 4820.00,
+      "earnings_last_30d": 5010.25,
+      "credit_limit": 2000,
+      "outstanding_balance": 750.00,
+      "ai_score": 761,
+      "status": "active",
+      "applications": [
+        {
+          "application_id": "MCA-20261030-00741",
+          "applied_at": "2026-10-30T09:15:00Z",
+          "amount_requested": 1000,
+          "amount_approved": 1000,
+          "apr": 14.2,
+          "purpose": "equipment_purchase",
+          "repayment_pct": 12,
+          "status": "active",
+          "payments": [
+            { "payment_id": "PMT-001", "date": "2026-11-02", "amount": 156.40, "source": "taskrabbit_payout" }
+          ]
+        }
+      ]
+    }
+  ],
+  "aggregate_stats": {
+    "total_disbursed_sandbox": 2847500,
+    "avg_default_rate_pct": 1.8,
+    "avg_repayment_days": 21,
+    "avg_ai_score": 718,
+    "platforms_integrated": ["uber", "doordash", "instacart", "taskrabbit", "lyft", "upwork"]
+  }
+}

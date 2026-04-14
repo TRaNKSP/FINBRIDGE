@@ -1,0 +1,90 @@
+{
+  "strategy": "savings-products",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for all savings products. All records are fictional.",
+  "accounts": [
+    {
+      "account_id": "SVG-ARS-20261001-00481",
+      "user_id": "USR-441829",
+      "product_type": "adaptive-round-up-savings",
+      "balance": 847.32,
+      "total_saved_to_date": 1284.50,
+      "base_apy": 4.2,
+      "current_apy": 4.2,
+      "round_ups_this_month": 142,
+      "avg_round_up_amount": 1.84,
+      "invested_in": "short_duration_treasury",
+      "ai_roundup_history": [
+        { "date": "2026-11-01", "transactions": 8, "total_roundup": 12.40 },
+        { "date": "2026-11-02", "transactions": 5, "total_roundup": 7.20 },
+        { "date": "2026-11-03", "transactions": 11, "total_roundup": 18.80 }
+      ]
+    },
+    {
+      "account_id": "SVG-GLSB-20261015-00192",
+      "user_id": "USR-887341",
+      "product_type": "goal-linked-savings-bond",
+      "balance": 31500,
+      "goal_target": 50000,
+      "goal_type": "home_down_payment",
+      "goal_progress_pct": 63,
+      "current_apy": 4.5,
+      "next_milestone_pct": 75,
+      "next_milestone_apy": 6.0,
+      "estimated_goal_date": "2028-01-15",
+      "milestone_history": [
+        { "milestone_pct": 25, "achieved_date": "2026-06-01", "apy_unlocked": 3.5 },
+        { "milestone_pct": 50, "achieved_date": "2026-10-12", "apy_unlocked": 4.5 }
+      ]
+    },
+    {
+      "account_id": "SVG-GHS-20270811-00781",
+      "user_id": "USR-339201",
+      "product_type": "gas-hedge-savings",
+      "balance": 2400.00,
+      "base_apy": 3.8,
+      "hedge_apy_component": 1.2,
+      "combined_apy": 5.0,
+      "personal_fuel_baseline_usd_per_gallon": 3.42,
+      "hedge_trigger_price_usd": 4.10,
+      "current_gas_price_usd": 4.84,
+      "hedge_active": true,
+      "hedge_credits_ytd_usd": 184.20,
+      "gallons_per_month_baseline": 42
+    },
+    {
+      "account_id": "SVG-SLSA-20270301-00091",
+      "user_id": "USR-774102",
+      "product_type": "skills-linked-savings",
+      "balance": 5800.00,
+      "base_apy": 3.5,
+      "bonus_apy_earned": 1.5,
+      "combined_apy": 5.0,
+      "credentials_earned": [
+        { "credential": "AWS Cloud Practitioner", "issuer": "Amazon", "verified_date": "2026-09-14", "apy_bonus": 0.5 },
+        { "credential": "Python Data Analysis", "issuer": "Coursera/Google", "verified_date": "2026-11-02", "apy_bonus": 0.5 },
+        { "credential": "Project Management Professional", "issuer": "PMI", "verified_date": "2027-01-08", "apy_bonus": 0.5 }
+      ],
+      "employer_match_active": true,
+      "employer_id": "EMP-ACME-0041",
+      "employer_match_pct": 100
+    },
+    {
+      "account_id": "SVG-FRV-20280601-00041",
+      "user_id": "USR-FAMILY-0012",
+      "product_type": "family-resilience-vault",
+      "household_balance": 12400.00,
+      "target_emergency_fund": 18000,
+      "members": [
+        { "member_id": "USR-441829", "role": "primary", "monthly_contribution": 240, "sub_balance": 4800 },
+        { "member_id": "USR-441830", "role": "spouse", "monthly_contribution": 180, "sub_balance": 3600 },
+        { "member_id": "USR-441831", "role": "child_savings", "monthly_contribution": 50, "sub_balance": 1000 }
+      ],
+      "ai_risk_score": 0.22,
+      "months_to_target": 11,
+      "early_warning_active": false
+    }
+  ]
+}

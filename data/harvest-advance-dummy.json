@@ -1,0 +1,61 @@
+{
+  "strategy": "harvest-advance",
+  "version": "v1",
+  "environment": "sandbox",
+  "generated_at": "2026-11-04T14:23:00Z",
+  "description": "Dummy data for Harvest Advance (Ag Micro-Loan) API. All records are fictional.",
+  "loans": [
+    {
+      "loan_id": "HARV-20270415-00312",
+      "farm_id": "FARM-TN-00412",
+      "farmer_name": "Billy R.",
+      "state": "TN",
+      "crop_type": "corn",
+      "acres": 85,
+      "planting_date": "2027-04-15",
+      "expected_harvest_date": "2027-10-01",
+      "loan_amount": 7500,
+      "apr": 11.2,
+      "status": "disbursed",
+      "disbursed_at": "2027-04-12T08:00:00Z",
+      "repayment_due": "2027-10-15",
+      "ai_yield_forecast": {
+        "bushels_per_acre": 168,
+        "total_bushels": 14280,
+        "corn_price_forecast_per_bushel": 5.40,
+        "gross_revenue_forecast": 77112,
+        "confidence": 0.81
+      },
+      "weather_risk_score": 0.22,
+      "insurance_linked": true,
+      "insurance_policy_id": "INS-USDA-20270415-00312",
+      "satellite_health_index": 0.78
+    },
+    {
+      "loan_id": "HARV-20270420-00418",
+      "farm_id": "FARM-IA-00881",
+      "farmer_name": "Clara H.",
+      "state": "IA",
+      "crop_type": "soybeans",
+      "acres": 140,
+      "planting_date": "2027-04-20",
+      "expected_harvest_date": "2027-10-08",
+      "loan_amount": 9800,
+      "apr": 9.8,
+      "status": "disbursed",
+      "disbursed_at": "2027-04-18T10:30:00Z",
+      "repayment_due": "2027-10-22",
+      "ai_yield_forecast": {
+        "bushels_per_acre": 52,
+        "total_bushels": 7280,
+        "soybean_price_forecast_per_bushel": 13.80,
+        "gross_revenue_forecast": 100464,
+        "confidence": 0.88
+      },
+      "weather_risk_score": 0.15,
+      "insurance_linked": true,
+      "insurance_policy_id": "INS-USDA-20270420-00418",
+      "satellite_health_index": 0.84
+    }
+  ]
+}
